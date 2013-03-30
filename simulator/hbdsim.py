@@ -5,7 +5,14 @@ def enum(*sequential, **named):
 	enums = dict(zip(sequential, range(len(sequential))), **named)
 	return type('Enum', (), enums)
 
-CardType = enum('OpenOcean', 'TreasureIsland', 'Town', 'Unexplored', 'Whirlpool', 'Whirlwind', 'Storm', 'Shipwreck')
+SquareType = enum('OpenOcean', 'TreasureIsland', 'Town', 'Unexplored', 'Whirlpool', 'Whirlwind', 'Storm', 'Shipwreck')
+
+discoveryPile = List();
+discoveryDiscardPile = List();
+treasuresPile = List();
+treasuresDiscardPile = List();
+
+
 
 class Map:
 	def __init__(self, width, height):
