@@ -14,16 +14,20 @@ treasuresDiscardPile = List();
 '''
 class Map:
 	def __init__(self, width, height):
-		self.width = width;
-		self.height = height;
+		self.width = width
+		self.height = height
+		self.tile = {(x,y):0 for x in range(8) for y in range (8)}
+
+	def GetTile(self, x, y):
+		return self.tile[(x, y)]
+
+	def SetTile(self, x, y, v):
+		self.tile[(x, y)] = v
 
 class Card:
 	def __init__(self, cardType):
-		self.type = cardType;
+		self.type = cardType
 
-#map = Map(8,8)
-
-map = {(x,y):0 for x in range(8) for y in range (8)}
-point1 = (1, 2)
-map[point1] = 2
-print(map[(3, 2)])
+map = Map(8,8)
+map.SetTile(4, 4, 7)
+print map.GetTile(4, 4)
