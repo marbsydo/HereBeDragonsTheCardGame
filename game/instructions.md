@@ -51,10 +51,7 @@ A player can move their ship once and perform multiple actions, all in any order
 
 ### Movement
 
-* A ship can move up to two squares.
-    * Each movement must be horizontal or vertical, not diagonal.
-    * If the first move lands on an unexplored square, the ship does not get a second move.
-    * Actions can be performed in-between moves.
+* A ship can move one square in any direction: horizontal, vertical or diagonal.
 * If the ship lands on an unexplored square, take a card from the **discovery pile**. Update the map by drawing the symbol for the discovered location. (The symbol is on the top right hand corner of the card, if using the custom card set. Otherwise, refer to the **help sheet**).
     * If the card is an **amulet**, keep it in your **loot**.
     * If the card is a **dragon**, place it in your **troubles**.
