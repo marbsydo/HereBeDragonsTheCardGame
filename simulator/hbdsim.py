@@ -49,8 +49,10 @@ class Map:
 			sys.stdout.write('\n')
 
 class Card:
-	def __init__(self, cardType):
-		self.type = cardType
+	def __init__(self, name, category):
+		self.name = name
+		self.category = category
+		
 
 width = height = 8;
 map = Map(width, height)
