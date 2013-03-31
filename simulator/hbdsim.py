@@ -26,12 +26,15 @@ class Tile:
 			TileType.Shipwreck: '&',
 		}.get(self.tileType, '?')
 
-
 class Map:
 	def __init__(self, width, height):
 		self.width = width
 		self.height = height
 		self.tiles = {(x,y):Tile(TileType.OpenOcean) for x in range(width) for y in range (height)}
+		self.SetTile(0, 0, Tile(TileType.Town))
+		self.SetTile(0, height - 1, Tile(TileType.Town))
+		self.SetTile(width - 1, 0, Tile(TileType.Town))
+		self.SetTile(width - 1, height - 1, Tile(TileType.Town))
 
 	def GetTile(self, x, y):
 		return self.tiles[(x, y)]
@@ -42,22 +45,13 @@ class Map:
 	def Print(self):
 		for x in range(0, self.width):
 			for y in range(0, self.height):
-				tile = self.GetTile(x, y)
-				tileChar = tile.GetChar()
-				sys.stdout.write(tileChar)
+				sys.stdout.write(self.GetTile(x, y).GetChar())
 			sys.stdout.write('\n')
-
-
 
 class Card:
 	def __init__(self, cardType):
 		self.type = cardType
 
 width = height = 8;
-
 map = Map(width, height)
-map.SetTile(0, 0, Tile(TileType.Town))
-map.SetTile(0, height - 1, Tile(TileType.Town))
-map.SetTile(width - 1, 0, Tile(TileType.Town))
-map.SetTile(width - 1, height - 1, Tile(TileType.Town))
 map.Print()
