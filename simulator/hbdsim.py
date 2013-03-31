@@ -26,7 +26,7 @@ class Tile:
 			TileType.Shipwreck: '&',
 		}.get(self.tileType, '?')
 
-class Map:
+class GameMap:
 	def __init__(self, width, height):
 		self.width = width
 		self.height = height
@@ -195,6 +195,8 @@ class DragonAmulet(AmuletCard):
 		self.victoryPoints = 2;
 		self.tile = TileType.Any
 
+
+
 width = height = 8;
-map = Map(width, height)
+map = GameMap(width, height)
 map.Print()
