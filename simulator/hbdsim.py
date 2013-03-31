@@ -53,9 +53,11 @@ class Card:
 	def __init__(self, cardType):
 		self.type = cardType
 
-map = Map(8, 8)
+width = height = 8;
+
+map = Map(width, height)
 map.SetTile(0, 0, Tile(TileType.Town))
-map.SetTile(0, 7, Tile(TileType.Town))
-map.SetTile(7, 0, Tile(TileType.Town))
-map.SetTile(7, 7, Tile(TileType.Town))
+map.SetTile(0, height - 1, Tile(TileType.Town))
+map.SetTile(width - 1, 0, Tile(TileType.Town))
+map.SetTile(width - 1, height - 1, Tile(TileType.Town))
 map.Print()
