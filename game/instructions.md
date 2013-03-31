@@ -53,7 +53,6 @@ A player can move their ship once and perform multiple actions, all in any order
 
 * A ship can move one square in any direction: horizontal, vertical or diagonal.
 * If the ship lands on an unexplored square, take a card from the **discovery pile**. Update the map by drawing the symbol for the discovered location. (The symbol is on the top right hand corner of the card, if using the custom card set. Otherwise, refer to the **help sheet**).
-    * If the card is an **amulet**, keep it in your **loot**.
     * If the card is a **dragon**, place it in your **troubles**.
         * If any dragons already exist in your troubles, all the dragons **fell** each other.
     * If the card is a **location**, place it in the **discovery discard pile**.
@@ -61,8 +60,7 @@ A player can move their ship once and perform multiple actions, all in any order
 ### Actions
 
 * Loot can be discarded (i.e. thrown overboard).
-    * Discarded **amulets** go in the **discovery discard pile**.
-    * Discarded **treasures** go in the **treasures discard pile**.
+    * Discarded **loot** go in the **treasures discard pile**.
 * If the ship is on a **town**, **loot** can be deposited in exchange for **victory points** (providing the ship is not troubled by a dragon).
     * The value of loot varies. (The quantity of victory points is written on the card, if using the custom card set. Otherwise, refer to the **help sheet**).
     * Keep a tally of each player's victory points beneath their ship name.
