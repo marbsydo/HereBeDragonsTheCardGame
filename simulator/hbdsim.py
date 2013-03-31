@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import sys
+import random
 
 print "Here be Dragons: The Card Game: The Simulator\n"
 
@@ -250,6 +251,18 @@ GhostAmulet(),
 DragonAmulet(),
 DragonAmulet()
 ]
+
+random.seed(23)
+random.shuffle(discoveryPile)
+random.shuffle(treasurePile)
+
+print '\n  Discovery pile\n==================\n'
+for x in discoveryPile:
+	print x.name
+
+print '\n  Treasure pile\n=================\n'
+for x in treasurePile:
+	print x.name
 
 width = height = 8;
 map = GameMap(width, height)
