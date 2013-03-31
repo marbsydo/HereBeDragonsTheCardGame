@@ -226,6 +226,31 @@ GhostLeviathan(),
 GhostWyrm()
 ]
 
+treasurePile = [
+Gold(),
+Gold(),
+Gold(),
+Jewels(),
+Jewels(),
+Jewels(),
+Map(),
+Map(),
+Map(),
+Rum(),
+Rum(),
+Rum(),
+WindAmulet(),
+WindAmulet(),
+OceanAmulet(),
+OceanAmulet(),
+StormAmulet(),
+StormAmulet(),
+GhostAmulet(),
+GhostAmulet(),
+DragonAmulet(),
+DragonAmulet()
+]
+
 width = height = 8;
 map = GameMap(width, height)
 map.Print()
