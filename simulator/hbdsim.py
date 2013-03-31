@@ -195,7 +195,36 @@ class DragonAmulet(AmuletCard):
 		self.victoryPoints = 2;
 		self.tile = TileType.Any
 
-
+discoveryPile = [
+OpenOcean(),
+OpenOcean(),
+OpenOcean(),
+OpenOcean(),
+TreasureIsland(),
+TreasureIsland(),
+TreasureIsland(),
+TreasureIsland(),
+TreasureIsland(),
+TreasureIsland(),
+TreasureIsland(),
+TreasureIsland(),
+Whirlwind(),
+Whirlwind(),
+Whirlpool(),
+Whirlpool(),
+Storm(),
+Storm(),
+Shipwreck(),
+Shipwreck(),
+WindLeviathan(),
+WindWyrm(),
+OceanLeviathan(),
+OceanWyrm(),
+StormLeviathan(),
+StormWyrm(),
+GhostLeviathan(),
+GhostWyrm()
+]
 
 width = height = 8;
 map = GameMap(width, height)
