@@ -23,26 +23,25 @@ class GameOut:
 
 	def Print(self, text, colour = -1, background = False):
 		if colour < 0:
-			self.ColourReset()
+			self.PrintBasic(text)
 		else:
 			if background:
-				self.ColourBackgroundSet(colour)
+				pre = self.ColourBackground(colour)
 			else:
-				self.ColourTextSet(colour)
-		self.PrintBasic(text)
-		self.ColourReset()
+				pre = self.ColourText(colour)
+			self.PrintBasic(pre + text + self.ColourReset())
 
-	def PrintLine(self, text):
-		self.PrintBasic(text + '\n')
+	def PrintLine(self, text, colour = -1, background = False):
+		self.Print(text + '\n', colour, background)
 
-	def ColourTextSet(self, colour):
-		self.PrintBasic('\033[1;3' + str(self.ColourToNumber(colour)) + 'm')
+	def ColourText(self, colour):
+		return '\033[1;3' + str(self.ColourToNumber(colour)) + 'm'
 
-	def ColourBackgroundSet(self, colour):
-		self.PrintBasic('\033[1;4' + str(self.ColourToNumber(colour)) + 'm')
+	def ColourBackground(self, colour):
+		return '\033[1;4' + str(self.ColourToNumber(colour)) + 'm'
 
 	def ColourReset(self):
-		self.PrintBasic('\033[1;m')
+		return '\033[1;m'
 
 	def ColourToNumber(self, colour):
 		return {
@@ -103,9 +102,7 @@ class GameMap:
 	def Print(self):
 		for x in range(0, self.width):
 			for y in range(0, self.height):
-				sys.stdout.write('\033[1;31m')
 				sys.stdout.write(self.TileGet(x, y).CharGet())
-				sys.stdout.write('\033[1;m')
 			sys.stdout.write('\n')
 
 # Base card
@@ -346,7 +343,7 @@ while map.TileExists(TileType.Unexplored):
 		print 'Turn ' + str(turn) + ': ' + player.name + str(player.pos)
 		map.Print()
 
-		gameOut.Print('Test post')
+		gameOut.PrintLine('test post')
 
 		# End of turn - allow chance to quit game
 		rin = raw_input('Press <enter> to continue...\n')
