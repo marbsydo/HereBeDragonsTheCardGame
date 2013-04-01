@@ -4,11 +4,6 @@ import sys
 import random
 import os
 
-print "Here be Dragons: The Card Game: The Simulator\n"
-
-def printTitle(s):
-	sys.stdout.write('  ' + s + '  \n' + '=' * (len(s) + 4) + '\n')
-
 def enum(*sequential, **named):
 	enums = dict(zip(sequential, range(len(sequential))), **named)
 	return type('Enum', (), enums)
@@ -353,8 +348,11 @@ def RenderMap(pos = [-1, -1]):
 		gameIO.Print('\n')
 
 gameIO.Clear()
-gameIO.PrintLine('Game ready to start')
+gameIO.PrintLine('Here be Dragons: The Card Game: The Simulator')
 RenderMap()
+gameIO.PrintLine('There are ' + str(len(players)) + ' players:')
+for player in players:
+	gameIO.PrintLine('* ' + player.name)
 gameIO.Wait()
 
 turn = 0
