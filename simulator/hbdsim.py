@@ -196,6 +196,49 @@ class DragonAmulet(AmuletCard):
 		self.victoryPoints = 2;
 		self.tile = TileType.Any
 
+class CardPile:
+	def __init__(self):
+		self.EmptyCardPile()
+
+	def EmptyCardPile(self):
+		self.cards = []
+
+	def AddCard(self, card, quantity = 1):
+		for x in range (0, quantity):
+			print 'adding card'
+			self.cards.add(card)
+
+	def Shuffle(self):
+		random.shuffle(self.cards)
+
+	def Show(self):
+		print 'Start of card pile'
+		for x in self.cards:
+			print x.name
+		print 'End of card pile'
+
+class DiscoveryCardPile(CardPile):
+	def __init___(self):
+		super()
+		self.AddCard(OpenOcean(), 4)
+		self.AddCard(TreasureIsland(), 8)
+		self.AddCard(Whirlwind(), 2)
+		self.AddCard(Whirlpool(), 2)
+		self.AddCard(Storm(), 2)
+		self.AddCard(Shipwreck(), 2)
+		self.AddCard(WindLeviathan())
+		self.AddCard(WindWyrm())
+		self.AddCard(OceanLeviathan())
+		self.AddCard(OceanWyrm())
+		self.AddCard(StormLeviathan())
+		self.AddCard(StormWyrm())
+		self.AddCard(GhostLeviathan())
+		self.AddCard(GhostWyrm())
+
+discoveryCardPile = DiscoveryCardPile()
+discoveryCardPile.Show()
+
+'''
 class CardPiles:
 	def __init__(self):
 		random.seed(23)
@@ -222,6 +265,8 @@ class CardPiles:
 	def DiscoveryPileShuffle():
 		random.shuffle(self.discoveryPile)
 
+	def Discovery
+
 	def TreasurePileInit():
 		self.treasurePile = [
 		Gold(), Gold(), Gold(),
@@ -241,7 +286,7 @@ class CardPiles:
 class Player:
 	def __init__(self):
 		self.cards = []
-
+'''
 
 
 
