@@ -6,8 +6,6 @@ import os
 
 print "Here be Dragons: The Card Game: The Simulator\n"
 
-clear = lambda: os.system(['clear', 'cls'][os.name == 'nt'])
-
 def printTitle(s):
 	sys.stdout.write('  ' + s + '  \n' + '=' * (len(s) + 4) + '\n')
 
@@ -17,7 +15,10 @@ def enum(*sequential, **named):
 
 TileType = enum('None', 'Any', 'Unexplored', 'Town' ,'OpenOcean', 'TreasureIsland', 'Whirlpool', 'Whirlwind', 'Storm', 'Shipwreck')
 
-class GameOut:
+class GameIO:
+	def Clear(self):
+		os.system(['clear', 'cls'][os.name == 'nt'])
+
 	def PrintBasic(self, text):
 		sys.stdout.write(text)
 
@@ -58,6 +59,12 @@ class GameOut:
 		'crimson': 8,
 		'bold': 9
 		}.get(colour, 9)
+
+	def Input(self, text):
+		return raw_input(text)
+
+	def Wait(self):
+		return self.Input('Press <enter> to continue\n')
 
 class Tile:
 	def __init__(self, tileType):
@@ -322,7 +329,7 @@ class Player:
 		self.loot = CardPile()
 		self.trouble = CardPile()
 
-gameOut = GameOut()
+gameIO = GameIO()
 
 # Create map for the game with dimensions 8x8
 map = GameMap(8, 8)
@@ -340,35 +347,30 @@ def RenderMap(pos = [-1, -1]):
 		for y in range(0, map.height):
 			tileSymbol = map.TileGet(x, y).CharGet()
 			if x == pos[0] and y == pos[1]:
-				gameOut.Print(tileSymbol, 'red', 'background')
+				gameIO.Print(tileSymbol, 'red', 'background')
 			else:
-				gameOut.Print(tileSymbol)
-		gameOut.Print('\n')
+				gameIO.Print(tileSymbol)
+		gameIO.Print('\n')
 
+gameIO.Clear()
+gameIO.PrintLine('Game ready to start')
 RenderMap()
+gameIO.Wait()
 
 turn = 0
 while map.TileExists(TileType.Unexplored):
 	for player in players:
 		# Start of turn - clear, show player info
-		clear()
+		gameIO.Clear()
 		turn += 1
 		print 'Turn ' + str(turn) + ': ' + player.name + str(player.pos)
 
 		# Render map
 		RenderMap(player.pos)
-		'''
-		for x in range(0, width):
-			for y in range(0, height):
-				tileSymbol = map.TileGet(x, y).CharGet()
-				if x == player.pos[0] and y == player.pos[1]:
-					gameOut.Print(tileSymbol, 'red', 'background')
-				else:
-					gameOut.Print(tileSymbol)
-			gameOut.Print('\n')
-		'''
+
 
 		# End of turn - allow chance to quit game
-		rin = raw_input('Press <enter> to continue...\n')
+		#rin = raw_input('Press <enter> to continue...\n')
+		rin = gameIO.Wait()
 		if rin != '':
 			sys.exit()
