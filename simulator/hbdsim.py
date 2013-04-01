@@ -271,23 +271,26 @@ card = discoveryCardPile.TakeTopCard()
 print card.name
 
 class Player:
-	def __init__(self, name):
+	def __init__(self, name, pos):
 		self.name = name
+		self.pos = pos
 		self.loot = CardPile()
 		self.trouble = CardPile()
 
 width = height = 8;
 
 players = [
-Player('Jolly Rodger'),
-Player('Octopus Brine')]
+Player('Jolly Rodger', [0, 0]),
+Player('Octopus Brine', [0, height - 1]),
+Player('Zanzibar', [width - 1, 0]),
+Player('Going Merry', [width - 1, height - 1])
+]
 
 map = GameMap(width, height)
 map.Print()
 
 while map.TileExists(TileType.Unexplored):
-	# Main game loop
-	print 'game loop'
 	for player in players:
 		# Player turn
 		print player.name + "'s turn"
+		print player.pos
