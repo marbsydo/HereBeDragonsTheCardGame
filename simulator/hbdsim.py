@@ -17,6 +17,47 @@ def enum(*sequential, **named):
 
 TileType = enum('None', 'Any', 'Unexplored', 'Town' ,'OpenOcean', 'TreasureIsland', 'Whirlpool', 'Whirlwind', 'Storm', 'Shipwreck')
 
+class GameOut:
+	def PrintBasic(self, text):
+		sys.stdout.write(text)
+
+	def Print(self, text, colour = -1, background = False):
+		if colour < 0:
+			self.ColourReset()
+		else:
+			if background:
+				self.ColourBackgroundSet(colour)
+			else:
+				self.ColourTextSet(colour)
+		self.PrintBasic(text)
+		self.ColourReset()
+
+	def PrintLine(self, text):
+		self.PrintBasic(text + '\n')
+
+	def ColourTextSet(self, colour):
+		self.PrintBasic('\033[1;3' + str(self.ColourToNumber(colour)) + 'm')
+
+	def ColourBackgroundSet(self, colour):
+		self.PrintBasic('\033[1;4' + str(self.ColourToNumber(colour)) + 'm')
+
+	def ColourReset(self):
+		self.PrintBasic('\033[1;m')
+
+	def ColourToNumber(self, colour):
+		return {
+		'grey': 0,
+		'red': 1,
+		'green': 2,
+		'yellow': 3,
+		'blue': 4,
+		'magenta': 5,
+		'cyan': 6,
+		'white': 7,
+		'crimson': 8,
+		'bold': 9
+		}.get(colour, 9)
+
 class Tile:
 	def __init__(self, tileType):
 		self.tileType = tileType
@@ -62,7 +103,9 @@ class GameMap:
 	def Print(self):
 		for x in range(0, self.width):
 			for y in range(0, self.height):
+				sys.stdout.write('\033[1;31m')
 				sys.stdout.write(self.TileGet(x, y).CharGet())
+				sys.stdout.write('\033[1;m')
 			sys.stdout.write('\n')
 
 # Base card
@@ -280,6 +323,8 @@ class Player:
 		self.loot = CardPile()
 		self.trouble = CardPile()
 
+gameOut = GameOut()
+
 width = height = 8;
 
 players = [
@@ -292,11 +337,18 @@ Player('Going Merry', [width - 1, height - 1])
 map = GameMap(width, height)
 map.Print()
 
+turn = 0
 while map.TileExists(TileType.Unexplored):
 	for player in players:
+		# Start of turn - clear, show map and current player
 		clear()
-		print str(player.pos) + ' ' + player.name + '\'s turn'
+		turn += 1
+		print 'Turn ' + str(turn) + ': ' + player.name + str(player.pos)
 		map.Print()
+
+		gameOut.Print('Test post')
+
+		# End of turn - allow chance to quit game
 		rin = raw_input('Press <enter> to continue...\n')
 		if rin != '':
 			sys.exit()
