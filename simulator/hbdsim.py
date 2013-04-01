@@ -61,34 +61,15 @@ class GameIO:
 	def Wait(self):
 		return self.Input('Press <enter> to continue\n')
 
-class Tile:
-	def __init__(self, tileType):
-		self.tileType = tileType
-
-	def TypeGet(self):
-		return self.tileType
-
-	def CharGet(self):
-		return {
-			TileType.Unexplored: ' ',
-			TileType.Town: 'T',
-			TileType.OpenOcean: '~',
-			TileType.TreasureIsland: 'X',
-			TileType.Whirlpool: 'o',
-			TileType.Whirlwind: '*',
-			TileType.Storm: '^',
-			TileType.Shipwreck: '&',
-		}.get(self.tileType, '?')
-
 class GameMap:
 	def __init__(self, width, height):
 		self.width = width
 		self.height = height
-		self.tiles = {(x,y):Tile(TileType.Unexplored) for x in range(width) for y in range (height)}
-		self.TileSet(0, 0, Tile(TileType.Town))
-		self.TileSet(0, height - 1, Tile(TileType.Town))
-		self.TileSet(width - 1, 0, Tile(TileType.Town))
-		self.TileSet(width - 1, height - 1, Tile(TileType.Town))
+		self.tiles = {(x,y):TileType.Unexplored for x in range(width) for y in range (height)}
+		self.TileSet(0, 0, TileType.Town)
+		self.TileSet(0, height - 1, TileType.Town)
+		self.TileSet(width - 1, 0, TileType.Town)
+		self.TileSet(width - 1, height - 1, TileType.Town)
 
 	def TileGet(self, x, y):
 		return self.tiles[(x, y)]
@@ -99,7 +80,7 @@ class GameMap:
 	def TileExists(self, tile):
 		for x in range(0, self.width):
 			for y in range(0, self.height):
-				if self.tiles[(x, y)].TypeGet() == tile:
+				if self.tiles[(x, y)] == tile:
 					return True
 		return False
 
@@ -360,7 +341,7 @@ def RenderMap(pos = [-1, -1]):
 				TileType.Whirlwind: '*',
 				TileType.Storm: '^',
 				TileType.Shipwreck: '&',
-			}.get(map.TileGet(x, y).TypeGet(), '?')
+			}.get(map.TileGet(x, y), '?')
 
 			if x == pos[0] and y == pos[1]:
 				gameIO.Print(tileSymbol, 'red', 'background')
@@ -403,11 +384,11 @@ while map.TileExists(TileType.Unexplored):
 
 		player.pos = (px, py)
 
-		if map.TileGet(player.pos[0], player.pos[1]).TypeGet() == TileType.Unexplored:
+		if map.TileGet(player.pos[0], player.pos[1]) == TileType.Unexplored:
 			# Discover a new location
 			newLocation = discoveryCardPile.TakeTopCard()
 			gameIO.PrintLine('Discovered a new location: ' + newLocation.name)
-			map.TileSet(px, py, Tile(newLocation.tile))
+			map.TileSet(px, py, newLocation.tile)
 
 		# End of turn - allow chance to quit game
 		rin = gameIO.Wait()
