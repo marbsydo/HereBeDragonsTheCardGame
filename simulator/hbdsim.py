@@ -5,6 +5,9 @@ import random
 
 print "Here be Dragons: The Card Game: The Simulator\n"
 
+def printTitle(s):
+	sys.stdout.write('  ' + s + '  \n' + '=' * (len(s) + 4) + '\n')
+
 def enum(*sequential, **named):
 	enums = dict(zip(sequential, range(len(sequential))), **named)
 	return type('Enum', (), enums)
@@ -211,8 +214,11 @@ class CardPile:
 		random.shuffle(self.cards)
 
 	def Show(self):
-		for x in self.cards:
-			print x.name
+		for card in self.cards:
+			print card.name
+
+	def TakeTopCard(self):
+		return self.cards.pop()
 
 class DiscoveryCardPile(CardPile):
 	def __init__(self):
@@ -247,29 +253,18 @@ class TreasureCardPile(CardPile):
 
 discoveryCardPile = DiscoveryCardPile()
 discoveryCardPile.Shuffle()
-discoveryCardPile.Show()
 
 treasureCardPile = TreasureCardPile()
 treasureCardPile.Shuffle()
-treasureCardPile.Show()
+
+card = discoveryCardPile.TakeTopCard()
+print card.name
 
 class Player:
 	def __init__(self):
 		self.loot = CardPile()
 		self.trouble = CardPile()
 
-
-def printTitle(s):
-	sys.stdout.write('  ' + s + '  \n' + '=' * (len(s) + 4) + '\n')
-'''
-printTitle('Discovery pile')
-for x in discoveryPile:
-	print x.name
-
-printTitle('Treasure pile')
-for x in treasurePile:
-	print x.name
-'''
 width = height = 8;
 map = GameMap(width, height)
 map.Print()
