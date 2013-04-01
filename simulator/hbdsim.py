@@ -2,8 +2,11 @@
 
 import sys
 import random
+import os
 
 print "Here be Dragons: The Card Game: The Simulator\n"
+
+clear = lambda: os.system(['clear', 'cls'][os.name == 'nt'])
 
 def printTitle(s):
 	sys.stdout.write('  ' + s + '  \n' + '=' * (len(s) + 4) + '\n')
@@ -291,6 +294,9 @@ map.Print()
 
 while map.TileExists(TileType.Unexplored):
 	for player in players:
-		# Player turn
-		print player.name + "'s turn"
-		print player.pos
+		clear()
+		print str(player.pos) + ' ' + player.name + '\'s turn'
+		map.Print()
+		rin = raw_input('Press <enter> to continue...\n')
+		if rin != '':
+			sys.exit()
