@@ -246,16 +246,18 @@ class TreasureCardPile(CardPile):
 		self.AddCard(DragonAmulet(), 2),
 
 discoveryCardPile = DiscoveryCardPile()
+discoveryCardPile.Shuffle()
 discoveryCardPile.Show()
 
 treasureCardPile = TreasureCardPile()
+treasureCardPile.Shuffle()
 treasureCardPile.Show()
 
-'''
 class Player:
 	def __init__(self):
-		self.cards = []
-'''
+		self.loot = CardPile()
+		self.trouble = CardPile()
+
 
 def printTitle(s):
 	sys.stdout.write('  ' + s + '  \n' + '=' * (len(s) + 4) + '\n')
