@@ -18,7 +18,10 @@ class Tile:
 	def __init__(self, tileType):
 		self.tileType = tileType
 
-	def GetChar(self):
+	def TypeGet(self):
+		return self.tileType
+
+	def CharGet(self):
 		return {
 			TileType.Unexplored: ' ',
 			TileType.Town: 'T',
@@ -34,22 +37,29 @@ class GameMap:
 	def __init__(self, width, height):
 		self.width = width
 		self.height = height
-		self.tiles = {(x,y):Tile(TileType.OpenOcean) for x in range(width) for y in range (height)}
-		self.SetTile(0, 0, Tile(TileType.Town))
-		self.SetTile(0, height - 1, Tile(TileType.Town))
-		self.SetTile(width - 1, 0, Tile(TileType.Town))
-		self.SetTile(width - 1, height - 1, Tile(TileType.Town))
+		self.tiles = {(x,y):Tile(TileType.Unexplored) for x in range(width) for y in range (height)}
+		self.TileSet(0, 0, Tile(TileType.Town))
+		self.TileSet(0, height - 1, Tile(TileType.Town))
+		self.TileSet(width - 1, 0, Tile(TileType.Town))
+		self.TileSet(width - 1, height - 1, Tile(TileType.Town))
 
-	def GetTile(self, x, y):
+	def TileGet(self, x, y):
 		return self.tiles[(x, y)]
 
-	def SetTile(self, x, y, tile):
+	def TileSet(self, x, y, tile):
 		self.tiles[(x, y)] = tile
+
+	def TileExists(self, tile):
+		for x in range(0, self.width):
+			for y in range(0, self.height):
+				if self.tiles[(x, y)].TypeGet() == tile:
+					return True
+		return False
 
 	def Print(self):
 		for x in range(0, self.width):
 			for y in range(0, self.height):
-				sys.stdout.write(self.GetTile(x, y).GetChar())
+				sys.stdout.write(self.TileGet(x, y).CharGet())
 			sys.stdout.write('\n')
 
 # Base card
@@ -261,10 +271,23 @@ card = discoveryCardPile.TakeTopCard()
 print card.name
 
 class Player:
-	def __init__(self):
+	def __init__(self, name):
+		self.name = name
 		self.loot = CardPile()
 		self.trouble = CardPile()
 
 width = height = 8;
+
+players = [
+Player('Jolly Rodger'),
+Player('Octopus Brine')]
+
 map = GameMap(width, height)
 map.Print()
+
+while map.TileExists(TileType.Unexplored):
+	# Main game loop
+	print 'game loop'
+	for player in players:
+		# Player turn
+		print player.name + "'s turn"
