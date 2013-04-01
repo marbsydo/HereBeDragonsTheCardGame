@@ -366,9 +366,22 @@ while map.TileExists(TileType.Unexplored):
 		# Render map
 		RenderMap(player.pos)
 
+		# Player movement
+		px = player.pos[0]
+		py = player.pos[1]
+		px += random.randint(-1, 1)
+		py += random.randint(-1, 1)
+		if px < 0:
+			px = 0
+		if py < 0:
+			py = 0
+		if px > map.width - 1:
+			px = map.width - 1
+		if py > map.height - 1:
+			py = map.height - 1
+		player.pos = (px, py)
 
 		# End of turn - allow chance to quit game
-		#rin = raw_input('Press <enter> to continue...\n')
 		rin = gameIO.Wait()
 		if rin != '':
 			sys.exit()
