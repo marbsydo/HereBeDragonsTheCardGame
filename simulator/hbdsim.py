@@ -205,21 +205,18 @@ class CardPile:
 
 	def AddCard(self, card, quantity = 1):
 		for x in range (0, quantity):
-			print 'adding card'
-			self.cards.add(card)
+			self.cards.append(card)
 
 	def Shuffle(self):
 		random.shuffle(self.cards)
 
 	def Show(self):
-		print 'Start of card pile'
 		for x in self.cards:
 			print x.name
-		print 'End of card pile'
 
 class DiscoveryCardPile(CardPile):
-	def __init___(self):
-		super()
+	def __init__(self):
+		CardPile.__init__(self)
 		self.AddCard(OpenOcean(), 4)
 		self.AddCard(TreasureIsland(), 8)
 		self.AddCard(Whirlwind(), 2)
@@ -235,61 +232,30 @@ class DiscoveryCardPile(CardPile):
 		self.AddCard(GhostLeviathan())
 		self.AddCard(GhostWyrm())
 
+class TreasureCardPile(CardPile):
+	def __init__(self):
+		CardPile.__init__(self)
+		self.AddCard(Gold(), 3),
+		self.AddCard(Jewels(), 3),
+		self.AddCard(Map(), 3),
+		self.AddCard(Rum(), 3),
+		self.AddCard(WindAmulet(), 2),
+		self.AddCard(OceanAmulet(), 2),
+		self.AddCard(StormAmulet(), 2),
+		self.AddCard(GhostAmulet(), 2),
+		self.AddCard(DragonAmulet(), 2),
+
 discoveryCardPile = DiscoveryCardPile()
 discoveryCardPile.Show()
 
+treasureCardPile = TreasureCardPile()
+treasureCardPile.Show()
+
 '''
-class CardPiles:
-	def __init__(self):
-		random.seed(23)
-		DiscoveryPileInit()
-		DiscoveryPileShuffle()
-		TreasurePileInit()
-		TreasurePileShuffle()
-
-	def DiscoveryPileInit():
-		self.discoveryPile = [
-		OpenOcean(), OpenOcean(), OpenOcean(), OpenOcean(),
-		TreasureIsland(), TreasureIsland(), TreasureIsland(), TreasureIsland(),
-		TreasureIsland(), TreasureIsland(), TreasureIsland(), TreasureIsland(),
-		Whirlwind(), Whirlwind(),
-		Whirlpool(), Whirlpool(),
-		Storm(), Storm(),
-		Shipwreck(), Shipwreck(),
-		WindLeviathan(), WindWyrm(),
-		OceanLeviathan(), OceanWyrm(),
-		StormLeviathan(), StormWyrm(),
-		GhostLeviathan(), GhostWyrm()
-		]
-
-	def DiscoveryPileShuffle():
-		random.shuffle(self.discoveryPile)
-
-	def Discovery
-
-	def TreasurePileInit():
-		self.treasurePile = [
-		Gold(), Gold(), Gold(),
-		Jewels(), Jewels(), Jewels(),
-		Map(), Map(), Map(),
-		Rum(), Rum(), Rum(),
-		WindAmulet(), WindAmulet(),
-		OceanAmulet(), OceanAmulet(),
-		StormAmulet(), StormAmulet(),
-		GhostAmulet(), GhostAmulet(),
-		DragonAmulet(), DragonAmulet()
-		]
-
-	def TreasurePileShuffle():
-		random.shuffle(self.treasurePile)
-
 class Player:
 	def __init__(self):
 		self.cards = []
 '''
-
-
-
 
 def printTitle(s):
 	sys.stdout.write('  ' + s + '  \n' + '=' * (len(s) + 4) + '\n')
