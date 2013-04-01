@@ -196,39 +196,59 @@ class DragonAmulet(AmuletCard):
 		self.victoryPoints = 2;
 		self.tile = TileType.Any
 
-discoveryPile = [
-OpenOcean(), OpenOcean(), OpenOcean(), OpenOcean(),
-TreasureIsland(), TreasureIsland(), TreasureIsland(), TreasureIsland(),
-TreasureIsland(), TreasureIsland(), TreasureIsland(), TreasureIsland(),
-Whirlwind(), Whirlwind(),
-Whirlpool(), Whirlpool(),
-Storm(), Storm(),
-Shipwreck(), Shipwreck(),
-WindLeviathan(), WindWyrm(),
-OceanLeviathan(), OceanWyrm(),
-StormLeviathan(), StormWyrm(),
-GhostLeviathan(), GhostWyrm()
-]
+class CardPiles:
+	def __init__(self):
+		random.seed(23)
+		DiscoveryPileInit()
+		DiscoveryPileShuffle()
+		TreasurePileInit()
+		TreasurePileShuffle()
 
-treasurePile = [
-Gold(), Gold(), Gold(),
-Jewels(), Jewels(), Jewels(),
-Map(), Map(), Map(),
-Rum(), Rum(), Rum(),
-WindAmulet(), WindAmulet(),
-OceanAmulet(), OceanAmulet(),
-StormAmulet(), StormAmulet(),
-GhostAmulet(), GhostAmulet(),
-DragonAmulet(), DragonAmulet()
-]
+	def DiscoveryPileInit():
+		self.discoveryPile = [
+		OpenOcean(), OpenOcean(), OpenOcean(), OpenOcean(),
+		TreasureIsland(), TreasureIsland(), TreasureIsland(), TreasureIsland(),
+		TreasureIsland(), TreasureIsland(), TreasureIsland(), TreasureIsland(),
+		Whirlwind(), Whirlwind(),
+		Whirlpool(), Whirlpool(),
+		Storm(), Storm(),
+		Shipwreck(), Shipwreck(),
+		WindLeviathan(), WindWyrm(),
+		OceanLeviathan(), OceanWyrm(),
+		StormLeviathan(), StormWyrm(),
+		GhostLeviathan(), GhostWyrm()
+		]
 
-random.seed(23)
-random.shuffle(discoveryPile)
-random.shuffle(treasurePile)
+	def DiscoveryPileShuffle():
+		random.shuffle(self.discoveryPile)
+
+	def TreasurePileInit():
+		self.treasurePile = [
+		Gold(), Gold(), Gold(),
+		Jewels(), Jewels(), Jewels(),
+		Map(), Map(), Map(),
+		Rum(), Rum(), Rum(),
+		WindAmulet(), WindAmulet(),
+		OceanAmulet(), OceanAmulet(),
+		StormAmulet(), StormAmulet(),
+		GhostAmulet(), GhostAmulet(),
+		DragonAmulet(), DragonAmulet()
+		]
+
+	def TreasurePileShuffle():
+		random.shuffle(self.treasurePile)
+
+class Player:
+	def __init__(self):
+		self.cards = []
+
+
+
+
 
 def printTitle(s):
 	sys.stdout.write('  ' + s + '  \n' + '=' * (len(s) + 4) + '\n')
-
+'''
 printTitle('Discovery pile')
 for x in discoveryPile:
 	print x.name
@@ -236,7 +256,7 @@ for x in discoveryPile:
 printTitle('Treasure pile')
 for x in treasurePile:
 	print x.name
-
+'''
 width = height = 8;
 map = GameMap(width, height)
 map.Print()
