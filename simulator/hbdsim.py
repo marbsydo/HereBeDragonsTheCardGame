@@ -8,7 +8,7 @@ def enum(*sequential, **named):
 	enums = dict(zip(sequential, range(len(sequential))), **named)
 	return type('Enum', (), enums)
 
-TileType = enum('None', 'Any', 'Unexplored', 'Town' ,'OpenOcean', 'TreasureIsland', 'Whirlpool', 'Whirlwind', 'Storm', 'Shipwreck')
+Tile = enum('None', 'Any', 'Unexplored', 'Town' ,'OpenOcean', 'TreasureIsland', 'Whirlpool', 'Whirlwind', 'Storm', 'Shipwreck')
 
 class GameIO:
 	def Clear(self):
@@ -65,11 +65,11 @@ class GameMap:
 	def __init__(self, width, height):
 		self.width = width
 		self.height = height
-		self.tiles = {(x,y):TileType.Unexplored for x in range(width) for y in range (height)}
-		self.TileSet(0, 0, TileType.Town)
-		self.TileSet(0, height - 1, TileType.Town)
-		self.TileSet(width - 1, 0, TileType.Town)
-		self.TileSet(width - 1, height - 1, TileType.Town)
+		self.tiles = {(x,y):Tile.Unexplored for x in range(width) for y in range (height)}
+		self.TileSet(0, 0, Tile.Town)
+		self.TileSet(0, height - 1, Tile.Town)
+		self.TileSet(width - 1, 0, Tile.Town)
+		self.TileSet(width - 1, height - 1, Tile.Town)
 
 	def TileGet(self, x, y):
 		return self.tiles[(x, y)]
@@ -94,7 +94,7 @@ class GameMap:
 class Card:
 	def __init__(self):
 		self.name = 'Undefined Card'
-		self.tile = TileType.None
+		self.tile = Tile.None
 
 # Base card types
 class LocationCard(Card):
@@ -117,73 +117,73 @@ class AmuletCard(Card):
 class OpenOcean(LocationCard):
 	def __init__(self):
 		self.name = 'Open Ocean'
-		self.tile = TileType.OpenOcean
+		self.tile = Tile.OpenOcean
 
 class TreasureIsland(LocationCard):
 	def __init__(self):
 		self.name = 'Treasure Island'
-		self.tile = TileType.TreasureIsland
+		self.tile = Tile.TreasureIsland
 
 class Whirlwind(LocationCard):
 	def __init__(self):
 		self.name = 'Whirlwind'
-		self.tile = TileType.Whirlwind
+		self.tile = Tile.Whirlwind
 
 class Whirlpool(LocationCard):
 	def __init__(self):
 		self.name = 'Whirlpool'
-		self.tile = TileType.Whirlpool
+		self.tile = Tile.Whirlpool
 
 class Storm(LocationCard):
 	def __init__(self):
 		self.name = 'Storm'
-		self.tile = TileType.Storm
+		self.tile = Tile.Storm
 
 class Shipwreck(LocationCard):
 	def __init__(self):
 		self.name = 'Shipwreck'
-		self.tile = TileType.Shipwreck
+		self.tile = Tile.Shipwreck
 
 # Individual cards - dragons
 class WindLeviathan(DragonCard):
 	def __init__(self):
 		self.name = 'Wind Leviathan'
-		self.tile = TileType.Whirlwind
+		self.tile = Tile.Whirlwind
 
 class WindWyrm(DragonCard):
 	def __init__(self):
 		self.name = 'Wind Wyrm'
-		self.tile = TileType.Whirlwind
+		self.tile = Tile.Whirlwind
 
 class OceanLeviathan(DragonCard):
 	def __init__(self):
 		self.name = 'Ocean Leviathan'
-		self.tile = TileType.Whirlpool
+		self.tile = Tile.Whirlpool
 
 class OceanWyrm(DragonCard):
 	def __init__(self):
 		self.name = 'Ocean Wyrm'
-		self.tile = TileType.Whirlpool
+		self.tile = Tile.Whirlpool
 
 class StormLeviathan(DragonCard):
 	def __init__(self):
 		self.name = 'Storm Leviathan'
-		self.tile = TileType.Storm
+		self.tile = Tile.Storm
 
 class StormWyrm(DragonCard):
 	def __init__(self):
 		self.name = 'Storm Wyrm'
-		self.tile = TileType.Storm
+		self.tile = Tile.Storm
 
 class GhostLeviathan(DragonCard):
 	def __init__(self):
 		self.name = 'Ghost Leviathan'
-		self.tile = TileType.Shipwreck
+		self.tile = Tile.Shipwreck
 
 class GhostWyrm(DragonCard):
 	def __init__(self):
 		self.name = 'Ghost Wyrm'
-		self.tile = TileType.Shipwreck
+		self.tile = Tile.Shipwreck
 
 # Individual cards - treasures
 class Gold(TreasureCard):
@@ -211,31 +211,31 @@ class WindAmulet(AmuletCard):
 	def __init__(self):
 		self.name = 'Wind Amulet'
 		self.victoryPoints = 1;
-		self.tile = TileType.Whirlwind
+		self.tile = Tile.Whirlwind
 
 class OceanAmulet(AmuletCard):
 	def __init__(self):
 		self.name = 'Ocean Amulet'
 		self.victoryPoints = 1;
-		self.tile = TileType.Whirlpool
+		self.tile = Tile.Whirlpool
 
 class StormAmulet(AmuletCard):
 	def __init__(self):
 		self.name = 'Storm Amulet'
 		self.victoryPoints = 1;
-		self.tile = TileType.Storm
+		self.tile = Tile.Storm
 
 class GhostAmulet(AmuletCard):
 	def __init__(self):
 		self.name = 'Ghost Amulet'
 		self.victoryPoints = 1;
-		self.tile = TileType.Shipwreck
+		self.tile = Tile.Shipwreck
 
 class DragonAmulet(AmuletCard):
 	def __init__(self):
 		self.name = 'Dragon Amulet'
 		self.victoryPoints = 2;
-		self.tile = TileType.Any
+		self.tile = Tile.Any
 
 class CardPile:
 	def __init__(self):
@@ -333,14 +333,14 @@ def RenderMap(pos = [-1, -1]):
 	for y in range(0, map.width):
 		for x in range(0, map.height):
 			tileSymbol = {
-				TileType.Unexplored: ' ',
-				TileType.Town: 'T',
-				TileType.OpenOcean: '~',
-				TileType.TreasureIsland: 'X',
-				TileType.Whirlpool: 'o',
-				TileType.Whirlwind: '*',
-				TileType.Storm: '^',
-				TileType.Shipwreck: '&',
+				Tile.Unexplored: ' ',
+				Tile.Town: 'T',
+				Tile.OpenOcean: '~',
+				Tile.TreasureIsland: 'X',
+				Tile.Whirlpool: 'o',
+				Tile.Whirlwind: '*',
+				Tile.Storm: '^',
+				Tile.Shipwreck: '&',
 			}.get(map.TileGet(x, y), '?')
 
 			if x == pos[0] and y == pos[1]:
@@ -358,7 +358,7 @@ for player in players:
 gameIO.Wait()
 
 turn = 0
-while map.TileExists(TileType.Unexplored):
+while map.TileExists(Tile.Unexplored):
 	for player in players:
 		# Start of turn - clear, show player info
 		gameIO.Clear()
@@ -384,7 +384,7 @@ while map.TileExists(TileType.Unexplored):
 
 		player.pos = (px, py)
 
-		if map.TileGet(player.pos[0], player.pos[1]) == TileType.Unexplored:
+		if map.TileGet(player.pos[0], player.pos[1]) == Tile.Unexplored:
 			# Discover a new location
 			newLocation = discoveryCardPile.TakeTopCard()
 			gameIO.PrintLine('Discovered a new location: ' + newLocation.name)
