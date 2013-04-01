@@ -21,18 +21,20 @@ class GameOut:
 	def PrintBasic(self, text):
 		sys.stdout.write(text)
 
-	def Print(self, text, colour = -1, background = False):
+	def Print(self, text, colour = -1, textOrBackground = 'text'):
 		if colour < 0:
 			self.PrintBasic(text)
 		else:
-			if background:
+			if textOrBackground == 'background':
 				pre = self.ColourBackground(colour)
-			else:
+			elif textOrBackground == 'text':
 				pre = self.ColourText(colour)
+			else:
+				pre = self.ColourReset()
 			self.PrintBasic(pre + text + self.ColourReset())
 
-	def PrintLine(self, text, colour = -1, background = False):
-		self.Print(text + '\n', colour, background)
+	def PrintLine(self, text, colour = -1, textOrBackground = 'text'):
+		self.Print(text + '\n', colour, textOrBackground)
 
 	def ColourText(self, colour):
 		return '\033[1;3' + str(self.ColourToNumber(colour)) + 'm'
@@ -347,7 +349,7 @@ while map.TileExists(TileType.Unexplored):
 			for y in range(0, height):
 				tileSymbol = map.TileGet(x, y).CharGet()
 				if x == player.pos[0] and y == player.pos[1]:
-					gameOut.Print(tileSymbol, 'red')
+					gameOut.Print(tileSymbol, 'red', 'background')
 				else:
 					gameOut.Print(tileSymbol)
 			gameOut.Print('\n')
