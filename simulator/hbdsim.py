@@ -337,13 +337,20 @@ map.Print()
 turn = 0
 while map.TileExists(TileType.Unexplored):
 	for player in players:
-		# Start of turn - clear, show map and current player
+		# Start of turn - clear, show player info
 		clear()
 		turn += 1
 		print 'Turn ' + str(turn) + ': ' + player.name + str(player.pos)
-		map.Print()
 
-		gameOut.PrintLine('test post')
+		# Render map
+		for x in range(0, width):
+			for y in range(0, height):
+				tileSymbol = map.TileGet(x, y).CharGet()
+				if x == player.pos[0] and y == player.pos[1]:
+					gameOut.Print(tileSymbol, 'red')
+				else:
+					gameOut.Print(tileSymbol)
+			gameOut.Print('\n')
 
 		# End of turn - allow chance to quit game
 		rin = raw_input('Press <enter> to continue...\n')
