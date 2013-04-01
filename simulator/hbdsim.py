@@ -338,14 +338,35 @@ Player('Going Merry', [map.width - 1, map.height - 1])
 ]
 
 def RenderMap(pos = [-1, -1]):
-	for x in range(0, map.width):
-		for y in range(0, map.height):
-			tileSymbol = map.TileGet(x, y).CharGet()
+	key = [
+	'T = Town',
+	'~ = Open Ocean',
+	'X = Treasure Island',
+	'o = Whirlpool',
+	'* = Whirlwind',
+	'^ = Storm',
+	'& = Shipwreck',
+	'? = Error'
+	]
+
+	for y in range(0, map.width):
+		for x in range(0, map.height):
+			tileSymbol = {
+				TileType.Unexplored: ' ',
+				TileType.Town: 'T',
+				TileType.OpenOcean: '~',
+				TileType.TreasureIsland: 'X',
+				TileType.Whirlpool: 'o',
+				TileType.Whirlwind: '*',
+				TileType.Storm: '^',
+				TileType.Shipwreck: '&',
+			}.get(map.TileGet(x, y).TypeGet(), '?')
+
 			if x == pos[0] and y == pos[1]:
 				gameIO.Print(tileSymbol, 'red', 'background')
 			else:
 				gameIO.Print(tileSymbol)
-		gameIO.Print('\n')
+		gameIO.PrintLine(' ' + key[y])
 
 gameIO.Clear()
 gameIO.PrintLine('Here be Dragons: The Card Game: The Simulator')
@@ -379,7 +400,14 @@ while map.TileExists(TileType.Unexplored):
 			px = map.width - 1
 		if py > map.height - 1:
 			py = map.height - 1
+
 		player.pos = (px, py)
+
+		if map.TileGet(player.pos[0], player.pos[1]).TypeGet() == TileType.Unexplored:
+			# Discover a new location
+			newLocation = discoveryCardPile.TakeTopCard()
+			gameIO.PrintLine('Discovered a new location: ' + newLocation.name)
+			map.TileSet(px, py, Tile(newLocation.tile))
 
 		# End of turn - allow chance to quit game
 		rin = gameIO.Wait()
