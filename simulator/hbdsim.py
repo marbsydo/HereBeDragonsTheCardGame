@@ -197,70 +197,43 @@ class DragonAmulet(AmuletCard):
 		self.tile = TileType.Any
 
 discoveryPile = [
-OpenOcean(),
-OpenOcean(),
-OpenOcean(),
-OpenOcean(),
-TreasureIsland(),
-TreasureIsland(),
-TreasureIsland(),
-TreasureIsland(),
-TreasureIsland(),
-TreasureIsland(),
-TreasureIsland(),
-TreasureIsland(),
-Whirlwind(),
-Whirlwind(),
-Whirlpool(),
-Whirlpool(),
-Storm(),
-Storm(),
-Shipwreck(),
-Shipwreck(),
-WindLeviathan(),
-WindWyrm(),
-OceanLeviathan(),
-OceanWyrm(),
-StormLeviathan(),
-StormWyrm(),
-GhostLeviathan(),
-GhostWyrm()
+OpenOcean(), OpenOcean(), OpenOcean(), OpenOcean(),
+TreasureIsland(), TreasureIsland(), TreasureIsland(), TreasureIsland(),
+TreasureIsland(), TreasureIsland(), TreasureIsland(), TreasureIsland(),
+Whirlwind(), Whirlwind(),
+Whirlpool(), Whirlpool(),
+Storm(), Storm(),
+Shipwreck(), Shipwreck(),
+WindLeviathan(), WindWyrm(),
+OceanLeviathan(), OceanWyrm(),
+StormLeviathan(), StormWyrm(),
+GhostLeviathan(), GhostWyrm()
 ]
 
 treasurePile = [
-Gold(),
-Gold(),
-Gold(),
-Jewels(),
-Jewels(),
-Jewels(),
-Map(),
-Map(),
-Map(),
-Rum(),
-Rum(),
-Rum(),
-WindAmulet(),
-WindAmulet(),
-OceanAmulet(),
-OceanAmulet(),
-StormAmulet(),
-StormAmulet(),
-GhostAmulet(),
-GhostAmulet(),
-DragonAmulet(),
-DragonAmulet()
+Gold(), Gold(), Gold(),
+Jewels(), Jewels(), Jewels(),
+Map(), Map(), Map(),
+Rum(), Rum(), Rum(),
+WindAmulet(), WindAmulet(),
+OceanAmulet(), OceanAmulet(),
+StormAmulet(), StormAmulet(),
+GhostAmulet(), GhostAmulet(),
+DragonAmulet(), DragonAmulet()
 ]
 
 random.seed(23)
 random.shuffle(discoveryPile)
 random.shuffle(treasurePile)
 
-print '\n  Discovery pile\n==================\n'
+def printTitle(s):
+	sys.stdout.write('  ' + s + '  \n' + '=' * (len(s) + 4) + '\n')
+
+printTitle('Discovery pile')
 for x in discoveryPile:
 	print x.name
 
-print '\n  Treasure pile\n=================\n'
+printTitle('Treasure pile')
 for x in treasurePile:
 	print x.name
 
