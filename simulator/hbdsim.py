@@ -29,7 +29,7 @@ class GameIO:
 				pre = self.ColourReset()
 			self.PrintBasic(pre + text + self.ColourReset())
 
-	def PrintLine(self, text, colour = -1, textOrBackground = 'text'):
+	def PrintLine(self, text = '', colour = -1, textOrBackground = 'text'):
 		self.Print(text + '\n', colour, textOrBackground)
 
 	def ColourText(self, colour):
@@ -308,7 +308,7 @@ class Player:
 gameIO = GameIO()
 
 # Create map for the game with dimensions 8x8
-map = GameMap(8, 8)
+map = GameMap(9, 9)
 
 # Create players
 players = [
@@ -320,14 +320,10 @@ Player('Going Merry', [map.width - 1, map.height - 1])
 
 def RenderMap(pos = [-1, -1]):
 	key = [
-	'T = Town',
-	'~ = Open Ocean',
-	'X = Treasure Island',
-	'o = Whirlpool',
-	'* = Whirlwind',
-	'^ = Storm',
-	'& = Shipwreck',
-	'? = Error'
+	'o = Whirlpool   X = Treasure Island',
+	'* = Whirlwind   T = Town',
+	'^ = Storm       * = Open ocean',
+	'& = Shipwreck   ? = Error',
 	]
 
 	for y in range(0, map.width):
@@ -347,7 +343,10 @@ def RenderMap(pos = [-1, -1]):
 				gameIO.Print(tileSymbol, 'red', 'background')
 			else:
 				gameIO.Print(tileSymbol)
-		gameIO.PrintLine(' ' + key[y])
+		if y < len(key):
+			gameIO.PrintLine(' ' + key[y])
+		else:
+			gameIO.PrintLine()
 
 gameIO.Clear()
 gameIO.PrintLine('Here be Dragons: The Card Game: The Simulator')
