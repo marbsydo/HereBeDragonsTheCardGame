@@ -324,17 +324,28 @@ class Player:
 
 gameOut = GameOut()
 
-width = height = 8;
+# Create map for the game with dimensions 8x8
+map = GameMap(8, 8)
 
+# Create players
 players = [
 Player('Jolly Rodger', [0, 0]),
-Player('Octopus Brine', [0, height - 1]),
-Player('Zanzibar', [width - 1, 0]),
-Player('Going Merry', [width - 1, height - 1])
+Player('Octopus Brine', [0, map.height - 1]),
+Player('Zanzibar', [map.width - 1, 0]),
+Player('Going Merry', [map.width - 1, map.height - 1])
 ]
 
-map = GameMap(width, height)
-map.Print()
+def RenderMap(pos = [-1, -1]):
+	for x in range(0, map.width):
+		for y in range(0, map.height):
+			tileSymbol = map.TileGet(x, y).CharGet()
+			if x == pos[0] and y == pos[1]:
+				gameOut.Print(tileSymbol, 'red', 'background')
+			else:
+				gameOut.Print(tileSymbol)
+		gameOut.Print('\n')
+
+RenderMap()
 
 turn = 0
 while map.TileExists(TileType.Unexplored):
@@ -345,6 +356,8 @@ while map.TileExists(TileType.Unexplored):
 		print 'Turn ' + str(turn) + ': ' + player.name + str(player.pos)
 
 		# Render map
+		RenderMap(player.pos)
+		'''
 		for x in range(0, width):
 			for y in range(0, height):
 				tileSymbol = map.TileGet(x, y).CharGet()
@@ -353,6 +366,7 @@ while map.TileExists(TileType.Unexplored):
 				else:
 					gameOut.Print(tileSymbol)
 			gameOut.Print('\n')
+		'''
 
 		# End of turn - allow chance to quit game
 		rin = raw_input('Press <enter> to continue...\n')
