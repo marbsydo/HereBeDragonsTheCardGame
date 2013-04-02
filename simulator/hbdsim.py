@@ -43,6 +43,7 @@ class GameIO:
 
 	def ColourToNumber(self, colour):
 		return {
+		'default': -1,
 		'grey': 0,
 		'red': 1,
 		'green': 2,
@@ -339,10 +340,21 @@ def RenderMap(pos = [-1, -1]):
 				Tile.Shipwreck: '&',
 			}.get(map.TileGet(x, y), '?')
 
+			tileColour = {
+				Tile.Unexplored: 'default',
+				Tile.Town: 'default',
+				Tile.OpenOcean: 'blue',
+				Tile.TreasureIsland: 'yellow',
+				Tile.Whirlpool: 'magenta',
+				Tile.Whirlwind: 'grey',
+				Tile.Storm: 'red',
+				Tile.Shipwreck: 'crimson'
+			}.get(map.TileGet(x, y), 'grey')
+
 			if x == pos[0] and y == pos[1]:
 				gameIO.Print(tileSymbol, 'red', 'background')
 			else:
-				gameIO.Print(tileSymbol)
+				gameIO.Print(tileSymbol, tileColour, 'text')
 		if y < len(key):
 			gameIO.PrintLine(' ' + key[y])
 		else:
@@ -354,6 +366,7 @@ RenderMap()
 gameIO.PrintLine('There are ' + str(len(players)) + ' players:')
 for player in players:
 	gameIO.PrintLine('* ' + player.name)
+gameIO.PrintLine('The game is about to start.')
 gameIO.Wait()
 
 turn = 0
@@ -363,9 +376,6 @@ while map.TileExists(Tile.Unexplored):
 		gameIO.Clear()
 		turn += 1
 		print 'Turn ' + str(turn) + ': ' + player.name + str(player.pos)
-
-		# Render map
-		RenderMap(player.pos)
 
 		# Player movement
 		px = player.pos[0]
@@ -386,8 +396,15 @@ while map.TileExists(Tile.Unexplored):
 		if map.TileGet(player.pos[0], player.pos[1]) == Tile.Unexplored:
 			# Discover a new location
 			newLocation = discoveryCardPile.TakeTopCard()
-			gameIO.PrintLine('Discovered a new location: ' + newLocation.name)
 			map.TileSet(px, py, newLocation.tile)
+		else:
+			newLocation = Tile.None
+
+		# Render map
+		RenderMap(player.pos)
+
+		if newLocation != Tile.None:
+			gameIO.PrintLine('Discovered a new location: ' + newLocation.name)
 
 		# End of turn - allow chance to quit game
 		rin = gameIO.Wait()
