@@ -475,20 +475,40 @@ while map.TileExists(Tile.Unexplored):
 		print 'Turn ' + str(turn) + ': ' + player.name
 
 		# Player movement
-		'''
-		adjacentTiles = []
-		for x in range(player.pos[0] - 1, player.pos[0] + 1):
-			for y in range(player.pos[1] - 1, player.pos[1] + 1):
-				adjacentTiles.add(map.TileGet(x, y))
-				# TODO: Add tile location
-		random.shuffle(adjacentTiles)
-		for adjacentTile in adjacentTiles:
-			if adjacentTile == Tile.Unexplored:
-				# Move to tile location
-				pass
-		# if not moved, move to random location
-		'''
 		
+		# Find all adjacent tiles
+		adjacentTiles = []
+		for x in range(max(player.pos[0] - 1, 0), min(player.pos[0] + 2, map.width)):
+			for y in range(max(player.pos[1] - 1, 0), min(player.pos[1] + 2, map.height)):
+				adjacentTiles.append(((x, y), map.TileGet(x, y)))
+		random.shuffle(adjacentTiles)
+
+		'''
+		# Debug: Show potential tiles
+		gameIO.Print('Potential: ')
+		for adjacentTile in adjacentTiles:
+			gameIO.Print('(' + str(adjacentTile[0][0]) + ',' + str(adjacentTile[0][1]) + ')')
+		'''
+
+		# Choose a random location, which is the default
+		px = adjacentTiles[0][0][0]
+		py = adjacentTiles[0][0][1]
+
+		# Choose the first unexplored location
+		# If none is found, the default is used (by default)
+		for adjacentTile in adjacentTiles:
+			if adjacentTile[1] == Tile.Unexplored:
+				px = adjacentTile[0][0]
+				py = adjacentTile[0][1]
+				break
+
+		'''
+		# Debug: Show chosen tile
+		gameIO.PrintLine(' Chosen:(' + str(px) + ',' + str(py) + ')')
+		'''
+
+		'''
+		# Completely random movement
 		px = player.pos[0]
 		py = player.pos[1]
 		px += random.randint(-1, 1)
@@ -501,7 +521,7 @@ while map.TileExists(Tile.Unexplored):
 			px = map.width - 1
 		if py > map.height - 1:
 			py = map.height - 1
-		
+		'''
 
 		player.pos = (px, py)
 
