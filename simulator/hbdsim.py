@@ -387,8 +387,7 @@ class Player:
 
 gameIO = GameIO()
 
-# Create map for the game with dimensions 8x8
-map = GameMap(9, 9)
+map = GameMap(10, 10)
 
 # Create players
 players = [
@@ -432,8 +431,8 @@ def RenderMap(pos = [-1, -1]):
 	key = [
 	TileToColourSymbol(Tile.Whirlpool) + ' = Whirlpool   ' + TileToColourSymbol(Tile.TreasureIsland) + ' = Treasure Island',
 	TileToColourSymbol(Tile.Whirlwind) + ' = Whirlwind   ' + TileToColourSymbol(Tile.Town) + ' = Town',
-	TileToColourSymbol(Tile.Tempest) + ' = Tempest     ' + TileToColourSymbol(Tile.OpenOcean) + ' = Open ocean',
-	TileToColourSymbol(Tile.Shipwreck) + ' = Shipwreck',
+	TileToColourSymbol(Tile.Tempest) + ' = Tempest     ' + TileToColourSymbol(Tile.MerchantShip) + ' = Merchant Ship',
+	TileToColourSymbol(Tile.Shipwreck) + ' = Shipwreck   ' + TileToColourSymbol(Tile.OpenOcean) + ' = Open ocean',
 	]
 
 	for y in range(0, map.width):
@@ -443,7 +442,7 @@ def RenderMap(pos = [-1, -1]):
 			if x == pos[0] and y == pos[1]:
 				tileString = gameIO.MakeString(TileToSymbol(tile), 'red', 'background')
 			else:
-				tileString = gameIO.MakeString(TileToSymbol(tile), TileToColour(tile), 'text')
+				tileString = TileToColourSymbol(tile)
 			gameIO.Print(tileString + ' ')
 		if y < len(key):
 			gameIO.PrintLine(' ' + key[y])
