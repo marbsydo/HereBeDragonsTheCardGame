@@ -8,7 +8,7 @@ def enum(*sequential, **named):
 	enums = dict(zip(sequential, range(len(sequential))), **named)
 	return type('Enum', (), enums)
 
-Tile = enum('None', 'Any', 'Unexplored', 'Town' ,'OpenOcean', 'TreasureIsland', 'Whirlpool', 'Whirlwind', 'Storm', 'Shipwreck')
+Tile = enum('None', 'Any', 'Unexplored', 'Town' ,'OpenOcean', 'TreasureIsland', 'Whirlpool', 'Whirlwind', 'Tempest', 'Shipwreck')
 
 class GameIO:
 	def Clear(self):
@@ -17,9 +17,9 @@ class GameIO:
 	def PrintBasic(self, text):
 		sys.stdout.write(text)
 
-	def Print(self, text, colour = -1, textOrBackground = 'text'):
+	def MakeString(self, text, colour = -1, textOrBackground = 'text'):
 		if colour < 0:
-			self.PrintBasic(text)
+			return text
 		else:
 			if textOrBackground == 'background':
 				pre = self.ColourBackground(colour)
@@ -27,10 +27,13 @@ class GameIO:
 				pre = self.ColourText(colour)
 			else:
 				pre = self.ColourReset()
-			self.PrintBasic(pre + text + self.ColourReset())
+			return pre + text + self.ColourReset()
+
+	def Print(self, text, colour = -1, textOrBackground = 'text'):
+		self.PrintBasic(self.MakeString(text, colour, textOrBackground))
 
 	def PrintLine(self, text = '', colour = -1, textOrBackground = 'text'):
-		self.Print(text + '\n', colour, textOrBackground)
+		self.PrintBasic(self.MakeString(text + '\n', colour, textOrBackground))
 
 	def ColourText(self, colour):
 		return '\033[1;3' + str(self.ColourToNumber(colour)) + 'm'
@@ -135,10 +138,10 @@ class Whirlpool(LocationCard):
 		self.name = 'Whirlpool'
 		self.tile = Tile.Whirlpool
 
-class Storm(LocationCard):
+class Tempest(LocationCard):
 	def __init__(self):
-		self.name = 'Storm'
-		self.tile = Tile.Storm
+		self.name = 'Tempest'
+		self.tile = Tile.Tempest
 
 class Shipwreck(LocationCard):
 	def __init__(self):
@@ -169,12 +172,12 @@ class OceanWyrm(DragonCard):
 class StormLeviathan(DragonCard):
 	def __init__(self):
 		self.name = 'Storm Leviathan'
-		self.tile = Tile.Storm
+		self.tile = Tile.Tempest
 
 class StormWyrm(DragonCard):
 	def __init__(self):
 		self.name = 'Storm Wyrm'
-		self.tile = Tile.Storm
+		self.tile = Tile.Tempest
 
 class GhostLeviathan(DragonCard):
 	def __init__(self):
@@ -224,7 +227,7 @@ class StormAmulet(AmuletCard):
 	def __init__(self):
 		self.name = 'Storm Amulet'
 		self.victoryPoints = 1;
-		self.tile = Tile.Storm
+		self.tile = Tile.Tempest
 
 class GhostAmulet(AmuletCard):
 	def __init__(self):
@@ -279,10 +282,10 @@ discoveryCardPile = CardPile(discoveryDiscardPile)
 treasureCardPile = CardPile(treasureDiscardPile)
 
 discoveryCardPile.AddCard(OpenOcean(), 4)
-discoveryCardPile.AddCard(TreasureIsland(), 8)
+discoveryCardPile.AddCard(TreasureIsland(), 4)
 discoveryCardPile.AddCard(Whirlwind(), 2)
 discoveryCardPile.AddCard(Whirlpool(), 2)
-discoveryCardPile.AddCard(Storm(), 2)
+discoveryCardPile.AddCard(Tempest(), 2)
 discoveryCardPile.AddCard(Shipwreck(), 2)
 discoveryCardPile.AddCard(WindLeviathan())
 discoveryCardPile.AddCard(WindWyrm())
@@ -328,42 +331,51 @@ Player('Zanzibar', [map.width - 1, 0]),
 Player('Going Merry', [map.width - 1, map.height - 1])
 ]
 
+
+def TileToSymbol(tile):
+	return {
+		Tile.Unexplored: ' ',
+		Tile.Town: 'T',
+		Tile.OpenOcean: '~',
+		Tile.TreasureIsland: 'X',
+		Tile.Whirlpool: 'o',
+		Tile.Whirlwind: '*',
+		Tile.Tempest: '^',
+		Tile.Shipwreck: '&',
+	}.get(tile, '?')
+
+def TileToColour(tile):
+	return {
+		Tile.Unexplored: 'default',
+		Tile.Town: 'default',
+		Tile.OpenOcean: 'blue',
+		Tile.TreasureIsland: 'yellow',
+		Tile.Whirlpool: 'magenta',
+		Tile.Whirlwind: 'cyan',
+		Tile.Tempest: 'red',
+		Tile.Shipwreck: 'crimson'
+	}.get(tile, 'grey')
+
+def TileToColourSymbol(tile):
+	return gameIO.MakeString(TileToSymbol(tile), TileToColour(tile))
+
 def RenderMap(pos = [-1, -1]):
 	key = [
-	'o = Whirlpool   X = Treasure Island',
-	'* = Whirlwind   T = Town',
-	'^ = Storm       * = Open ocean',
-	'& = Shipwreck   ? = Error',
+	TileToColourSymbol(Tile.Whirlpool) + ' = Whirlpool   ' + TileToColourSymbol(Tile.TreasureIsland) + ' = Treasure Island',
+	TileToColourSymbol(Tile.Whirlwind) + ' = Whirlwind   ' + TileToColourSymbol(Tile.Town) + ' = Town',
+	TileToColourSymbol(Tile.Tempest) + ' = Tempest     ' + TileToColourSymbol(Tile.OpenOcean) + ' = Open ocean',
+	TileToColourSymbol(Tile.Shipwreck) + ' = Shipwreck',
 	]
 
 	for y in range(0, map.width):
 		for x in range(0, map.height):
-			tileSymbol = {
-				Tile.Unexplored: ' ',
-				Tile.Town: 'T',
-				Tile.OpenOcean: '~',
-				Tile.TreasureIsland: 'X',
-				Tile.Whirlpool: 'o',
-				Tile.Whirlwind: '*',
-				Tile.Storm: '^',
-				Tile.Shipwreck: '&',
-			}.get(map.TileGet(x, y), '?')
-
-			tileColour = {
-				Tile.Unexplored: 'default',
-				Tile.Town: 'default',
-				Tile.OpenOcean: 'blue',
-				Tile.TreasureIsland: 'yellow',
-				Tile.Whirlpool: 'magenta',
-				Tile.Whirlwind: 'grey',
-				Tile.Storm: 'red',
-				Tile.Shipwreck: 'crimson'
-			}.get(map.TileGet(x, y), 'grey')
+			tile = map.TileGet(x, y)
 
 			if x == pos[0] and y == pos[1]:
-				gameIO.Print(tileSymbol, 'red', 'background')
+				tileString = gameIO.MakeString(TileToSymbol(tile), 'red', 'background')
 			else:
-				gameIO.Print(tileSymbol, tileColour, 'text')
+				tileString = gameIO.MakeString(TileToSymbol(tile), TileToColour(tile), 'text')
+			gameIO.Print(tileString + ' ')
 		if y < len(key):
 			gameIO.PrintLine(' ' + key[y])
 		else:
@@ -384,7 +396,7 @@ while map.TileExists(Tile.Unexplored):
 		# Start of turn - clear, show player info
 		gameIO.Clear()
 		turn += 1
-		print 'Turn ' + str(turn) + ': ' + player.name + str(player.pos)
+		print 'Turn ' + str(turn) + ': ' + player.name
 
 		# Player movement
 		px = player.pos[0]
