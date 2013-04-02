@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import sys
 import random
@@ -397,6 +398,10 @@ Player('Zanzibar', [map.width - 1, 0]),
 Player('Going Merry', [map.width - 1, map.height - 1])
 ]
 
+def NumberToTally(number):
+	fives = int(number) / 5
+	remainder = number - fives * 5
+	return '||||/ ' * fives + '|' * min(remainder, 4) + '/' * (remainder == 5)
 
 def TileToSymbol(tile):
 	return {
@@ -434,8 +439,9 @@ def RenderMap(pos = [-1, -1]):
 	TileToColourSymbol(Tile.Tempest) + ' = Tempest     ' + TileToColourSymbol(Tile.MerchantShip) + ' = Merchant Ship',
 	TileToColourSymbol(Tile.Shipwreck) + ' = Shipwreck   ' + TileToColourSymbol(Tile.OpenOcean) + ' = Open ocean',
 	]
-
+	gameIO.PrintLine('╔' + '═' * (map.width * 2 + 1) + '╗')
 	for y in range(0, map.width):
+		gameIO.Print('║ ')
 		for x in range(0, map.height):
 			tile = map.TileGet(x, y)
 
@@ -444,10 +450,12 @@ def RenderMap(pos = [-1, -1]):
 			else:
 				tileString = TileToColourSymbol(tile)
 			gameIO.Print(tileString + ' ')
+		gameIO.Print('║')
 		if y < len(key):
 			gameIO.PrintLine(' ' + key[y])
 		else:
 			gameIO.PrintLine()
+	gameIO.PrintLine('╚' + '═' * (map.width * 2 + 1) + '╝')
 
 gameIO.Clear()
 gameIO.PrintLine('Here be Dragons: The Card Game: The Simulator')
