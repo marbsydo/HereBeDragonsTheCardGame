@@ -239,8 +239,11 @@ class DragonAmulet(AmuletCard):
 		self.tile = Tile.Any
 
 class CardPile:
-	def __init__(self):
+	def __init__(self, refillPile = None):
 		self.EmptyCardPile()
+
+		# When this pile is empty, take all cards from the refill pile and shuffle
+		self.refillPile = refillPile
 
 	def EmptyCardPile(self):
 		self.cards = []
@@ -257,12 +260,23 @@ class CardPile:
 			print card.name
 
 	def TakeTopCard(self):
-		return self.cards.pop()
+		card = self.cards.pop()
+		self.RefillIfNecessary()
+		return card
 
-discoveryCardPile = CardPile()
-treasureCardPile = CardPile()
+	def RefillIfNecessary(self):
+		# If there is a refill pile, take all its cards and shuffle
+		if self.refillPile != None:
+			if len(self.cards) == 0:
+				for card in self.refillPile.cards:
+					self.AddCard(card, 1)
+				self.refillPile.EmptyCardPile()
+				self.Shuffle()
+
 discoveryDiscardPile = CardPile()
 treasureDiscardPile = CardPile()
+discoveryCardPile = CardPile(discoveryDiscardPile)
+treasureCardPile = CardPile(treasureDiscardPile)
 
 discoveryCardPile.AddCard(OpenOcean(), 4)
 discoveryCardPile.AddCard(TreasureIsland(), 8)
@@ -392,6 +406,9 @@ while map.TileExists(Tile.Unexplored):
 			# Discover a new location
 			newLocation = discoveryCardPile.TakeTopCard()
 			map.TileSet(px, py, newLocation.tile)
+
+			# Put card in discard pile
+			discoveryDiscardPile.AddCard(newLocation)
 		else:
 			newLocation = Tile.None
 
