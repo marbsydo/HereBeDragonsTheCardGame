@@ -76,7 +76,10 @@ class GameMap:
 		self.TileSet(width - 1, height - 1, Tile.Town)
 
 	def TileGet(self, x, y):
-		return self.tiles[(x, y)]
+		if x >= 0 and x < self.width and y >= 0 and y < self.height:
+			return self.tiles[(x, y)]
+		else:
+			return Tile.None
 
 	def TileSet(self, x, y, tile):
 		self.tiles[(x, y)] = tile
@@ -399,6 +402,20 @@ while map.TileExists(Tile.Unexplored):
 		print 'Turn ' + str(turn) + ': ' + player.name
 
 		# Player movement
+
+		adjacentTiles = []
+		for x in range(player.pos[0] - 1, player.pos[0] + 1):
+			for y in range(player.pos[1] - 1, player.pos[1] + 1):
+				adjacentTiles.add(map.TileGet(x, y))
+				# TODO: Add tile location
+		random.shuffle(adjacentTiles)
+		for adjacentTile in adjacentTiles:
+			if adjacentTile == Tile.Unexplored:
+				# Move to tile location
+				pass
+		# if not moved, move to random location
+
+		'''
 		px = player.pos[0]
 		py = player.pos[1]
 		px += random.randint(-1, 1)
@@ -411,6 +428,7 @@ while map.TileExists(Tile.Unexplored):
 			px = map.width - 1
 		if py > map.height - 1:
 			py = map.height - 1
+		'''
 
 		player.pos = (px, py)
 
