@@ -259,41 +259,36 @@ class CardPile:
 	def TakeTopCard(self):
 		return self.cards.pop()
 
-class DiscoveryCardPile(CardPile):
-	def __init__(self):
-		CardPile.__init__(self)
-		self.AddCard(OpenOcean(), 4)
-		self.AddCard(TreasureIsland(), 8)
-		self.AddCard(Whirlwind(), 2)
-		self.AddCard(Whirlpool(), 2)
-		self.AddCard(Storm(), 2)
-		self.AddCard(Shipwreck(), 2)
-		self.AddCard(WindLeviathan())
-		self.AddCard(WindWyrm())
-		self.AddCard(OceanLeviathan())
-		self.AddCard(OceanWyrm())
-		self.AddCard(StormLeviathan())
-		self.AddCard(StormWyrm())
-		self.AddCard(GhostLeviathan())
-		self.AddCard(GhostWyrm())
+discoveryCardPile = CardPile()
+treasureCardPile = CardPile()
+discoveryDiscardPile = CardPile()
+treasureDiscardPile = CardPile()
 
-class TreasureCardPile(CardPile):
-	def __init__(self):
-		CardPile.__init__(self)
-		self.AddCard(Gold(), 3),
-		self.AddCard(Jewels(), 3),
-		self.AddCard(Map(), 3),
-		self.AddCard(Rum(), 3),
-		self.AddCard(WindAmulet(), 2),
-		self.AddCard(OceanAmulet(), 2),
-		self.AddCard(StormAmulet(), 2),
-		self.AddCard(GhostAmulet(), 2),
-		self.AddCard(DragonAmulet(), 2),
-
-discoveryCardPile = DiscoveryCardPile()
+discoveryCardPile.AddCard(OpenOcean(), 4)
+discoveryCardPile.AddCard(TreasureIsland(), 8)
+discoveryCardPile.AddCard(Whirlwind(), 2)
+discoveryCardPile.AddCard(Whirlpool(), 2)
+discoveryCardPile.AddCard(Storm(), 2)
+discoveryCardPile.AddCard(Shipwreck(), 2)
+discoveryCardPile.AddCard(WindLeviathan())
+discoveryCardPile.AddCard(WindWyrm())
+discoveryCardPile.AddCard(OceanLeviathan())
+discoveryCardPile.AddCard(OceanWyrm())
+discoveryCardPile.AddCard(StormLeviathan())
+discoveryCardPile.AddCard(StormWyrm())
+discoveryCardPile.AddCard(GhostLeviathan())
+discoveryCardPile.AddCard(GhostWyrm())
 discoveryCardPile.Shuffle()
 
-treasureCardPile = TreasureCardPile()
+treasureCardPile.AddCard(Gold(), 3),
+treasureCardPile.AddCard(Jewels(), 3),
+treasureCardPile.AddCard(Map(), 3),
+treasureCardPile.AddCard(Rum(), 3),
+treasureCardPile.AddCard(WindAmulet(), 2),
+treasureCardPile.AddCard(OceanAmulet(), 2),
+treasureCardPile.AddCard(StormAmulet(), 2),
+treasureCardPile.AddCard(GhostAmulet(), 2),
+treasureCardPile.AddCard(DragonAmulet(), 2),
 treasureCardPile.Shuffle()
 
 card = discoveryCardPile.TakeTopCard()
