@@ -401,7 +401,7 @@ Player('Going Merry', [map.width - 1, map.height - 1])
 def NumberToTally(number):
 	fives = int(number) / 5
 	remainder = number - fives * 5
-	return '||||/ ' * fives + '|' * min(remainder, 4) + '/' * (remainder == 5)
+	return '||||/ ' * fives + '|' * remainder
 
 def TileToSymbol(tile):
 	return {
