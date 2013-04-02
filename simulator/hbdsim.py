@@ -8,7 +8,7 @@ def enum(*sequential, **named):
 	enums = dict(zip(sequential, range(len(sequential))), **named)
 	return type('Enum', (), enums)
 
-Tile = enum('None', 'Any', 'Unexplored', 'Town' ,'OpenOcean', 'TreasureIsland', 'Whirlpool', 'Whirlwind', 'Tempest', 'Shipwreck')
+Tile = enum('None', 'Any', 'Unexplored', 'Town' ,'OpenOcean', 'TreasureIsland', 'MerchantShip', 'Whirlpool', 'Whirlwind', 'Tempest', 'Shipwreck')
 
 class GameIO:
 	def Clear(self):
@@ -104,6 +104,12 @@ class Card:
 		self.tile = Tile.None
 
 # Base card types
+class VoidCard(Card):
+	def __init__(self):
+		self.category = 'Void'
+		self.name = 'Void'
+		self.tile = Tile.None
+
 class LocationCard(Card):
 	def __init__(self):
 		self.category = 'Location'
@@ -123,123 +129,176 @@ class AmuletCard(Card):
 # Individual cards - locations
 class OpenOcean(LocationCard):
 	def __init__(self):
+		LocationCard.__init__(self)
 		self.name = 'Open Ocean'
 		self.tile = Tile.OpenOcean
 
 class TreasureIsland(LocationCard):
 	def __init__(self):
+		LocationCard.__init__(self)
 		self.name = 'Treasure Island'
 		self.tile = Tile.TreasureIsland
 
+class MerchantShip(LocationCard):
+	def __init__(self):
+		LocationCard.__init__(self)
+		self.name = 'Merchant Ship'
+		self.tile = Tile.MerchantShip
+
 class Whirlwind(LocationCard):
 	def __init__(self):
+		LocationCard.__init__(self)
 		self.name = 'Whirlwind'
 		self.tile = Tile.Whirlwind
 
 class Whirlpool(LocationCard):
 	def __init__(self):
+		LocationCard.__init__(self)
 		self.name = 'Whirlpool'
 		self.tile = Tile.Whirlpool
 
 class Tempest(LocationCard):
 	def __init__(self):
+		LocationCard.__init__(self)
 		self.name = 'Tempest'
 		self.tile = Tile.Tempest
 
 class Shipwreck(LocationCard):
 	def __init__(self):
+		LocationCard.__init__(self)
 		self.name = 'Shipwreck'
 		self.tile = Tile.Shipwreck
 
 # Individual cards - dragons
-class WindLeviathan(DragonCard):
+class WindHydra(DragonCard):
 	def __init__(self):
-		self.name = 'Wind Leviathan'
+		DragonCard.__init__(self)
+		self.name = 'Hydra'
 		self.tile = Tile.Whirlwind
 
-class WindWyrm(DragonCard):
+class OceanKraken(DragonCard):
 	def __init__(self):
-		self.name = 'Wind Wyrm'
+		DragonCard.__init__(self)
+		self.name = 'Kraken'
+		self.tile = Tile.Whirlpool
+
+class StormCthulhu(DragonCard):
+	def __init__(self):
+		DragonCard.__init__(self)
+		self.name = 'Cthulhu'
+		self.tile = Tile.Tempest
+
+class GhostFlyingDutchman(DragonCard):
+	def __init__(self):
+		DragonCard.__init__(self)
+		self.name = 'Cthulhu'
+		self.tile = Tile.Shipwreck
+
+class WindLeviathan(DragonCard):
+	def __init__(self):
+		DragonCard.__init__(self)
+		self.name = 'Wind Leviathan'
 		self.tile = Tile.Whirlwind
 
 class OceanLeviathan(DragonCard):
 	def __init__(self):
+		DragonCard.__init__(self)
 		self.name = 'Ocean Leviathan'
-		self.tile = Tile.Whirlpool
-
-class OceanWyrm(DragonCard):
-	def __init__(self):
-		self.name = 'Ocean Wyrm'
 		self.tile = Tile.Whirlpool
 
 class StormLeviathan(DragonCard):
 	def __init__(self):
+		DragonCard.__init__(self)
 		self.name = 'Storm Leviathan'
-		self.tile = Tile.Tempest
-
-class StormWyrm(DragonCard):
-	def __init__(self):
-		self.name = 'Storm Wyrm'
 		self.tile = Tile.Tempest
 
 class GhostLeviathan(DragonCard):
 	def __init__(self):
+		DragonCard.__init__(self)
 		self.name = 'Ghost Leviathan'
 		self.tile = Tile.Shipwreck
 
+class WindWyrm(DragonCard):
+	def __init__(self):
+		DragonCard.__init__(self)
+		self.name = 'Wind Wyrm'
+		self.tile = Tile.Whirlwind
+
+class OceanWyrm(DragonCard):
+	def __init__(self):
+		DragonCard.__init__(self)
+		self.name = 'Ocean Wyrm'
+		self.tile = Tile.Whirlpool
+
+class StormWyrm(DragonCard):
+	def __init__(self):
+		DragonCard.__init__(self)
+		self.name = 'Storm Wyrm'
+		self.tile = Tile.Tempest
+
 class GhostWyrm(DragonCard):
 	def __init__(self):
+		DragonCard.__init__(self)
 		self.name = 'Ghost Wyrm'
 		self.tile = Tile.Shipwreck
 
 # Individual cards - treasures
 class Gold(TreasureCard):
 	def __init__(self):
+		TreasureCard.__init__(self)
 		self.name = 'Gold'
 		self.victoryPoints = 2;
 
 class Jewels(TreasureCard):
 	def __init__(self):
+		TreasureCard.__init__(self)
 		self.name = 'Jewels'
 		self.victoryPoints = 2;
 
 class Map(TreasureCard):
 	def __init__(self):
+		TreasureCard.__init__(self)
 		self.name = 'Map'
 		self.victoryPoints = 1;
 
 class Rum(TreasureCard):
 	def __init__(self):
+		TreasureCard.__init__(self)
 		self.name = 'Rum'
 		self.victoryPoints = 1;
 
 # Individual cards - amulets
 class WindAmulet(AmuletCard):
 	def __init__(self):
+		AmuletCard.__init__(self)
 		self.name = 'Wind Amulet'
 		self.victoryPoints = 1;
 		self.tile = Tile.Whirlwind
 
 class OceanAmulet(AmuletCard):
 	def __init__(self):
+		AmuletCard.__init__(self)
 		self.name = 'Ocean Amulet'
 		self.victoryPoints = 1;
 		self.tile = Tile.Whirlpool
 
 class StormAmulet(AmuletCard):
 	def __init__(self):
+		AmuletCard.__init__(self)
 		self.name = 'Storm Amulet'
 		self.victoryPoints = 1;
 		self.tile = Tile.Tempest
 
 class GhostAmulet(AmuletCard):
 	def __init__(self):
+		AmuletCard.__init__(self)
 		self.name = 'Ghost Amulet'
 		self.victoryPoints = 1;
 		self.tile = Tile.Shipwreck
 
 class DragonAmulet(AmuletCard):
 	def __init__(self):
+		AmuletCard.__init__(self)
 		self.name = 'Dragon Amulet'
 		self.victoryPoints = 2;
 		self.tile = Tile.Any
@@ -285,17 +344,22 @@ discoveryCardPile = CardPile(discoveryDiscardPile)
 treasureCardPile = CardPile(treasureDiscardPile)
 
 discoveryCardPile.AddCard(OpenOcean(), 4)
-discoveryCardPile.AddCard(TreasureIsland(), 4)
+discoveryCardPile.AddCard(TreasureIsland(), 6)
+discoveryCardPile.AddCard(MerchantShip(), 2)
 discoveryCardPile.AddCard(Whirlwind(), 2)
 discoveryCardPile.AddCard(Whirlpool(), 2)
 discoveryCardPile.AddCard(Tempest(), 2)
 discoveryCardPile.AddCard(Shipwreck(), 2)
+discoveryCardPile.AddCard(WindHydra())
 discoveryCardPile.AddCard(WindLeviathan())
 discoveryCardPile.AddCard(WindWyrm())
+discoveryCardPile.AddCard(OceanKraken())
 discoveryCardPile.AddCard(OceanLeviathan())
 discoveryCardPile.AddCard(OceanWyrm())
+discoveryCardPile.AddCard(StormCthulhu())
 discoveryCardPile.AddCard(StormLeviathan())
 discoveryCardPile.AddCard(StormWyrm())
+discoveryCardPile.AddCard(GhostFlyingDutchman())
 discoveryCardPile.AddCard(GhostLeviathan())
 discoveryCardPile.AddCard(GhostWyrm())
 discoveryCardPile.Shuffle()
@@ -341,6 +405,7 @@ def TileToSymbol(tile):
 		Tile.Town: 'T',
 		Tile.OpenOcean: '~',
 		Tile.TreasureIsland: 'X',
+		Tile.MerchantShip: '$',
 		Tile.Whirlpool: 'o',
 		Tile.Whirlwind: '*',
 		Tile.Tempest: '^',
@@ -353,6 +418,7 @@ def TileToColour(tile):
 		Tile.Town: 'default',
 		Tile.OpenOcean: 'blue',
 		Tile.TreasureIsland: 'yellow',
+		Tile.MerchantShip: 'green',
 		Tile.Whirlpool: 'magenta',
 		Tile.Whirlwind: 'cyan',
 		Tile.Tempest: 'red',
@@ -402,7 +468,7 @@ while map.TileExists(Tile.Unexplored):
 		print 'Turn ' + str(turn) + ': ' + player.name
 
 		# Player movement
-
+		'''
 		adjacentTiles = []
 		for x in range(player.pos[0] - 1, player.pos[0] + 1):
 			for y in range(player.pos[1] - 1, player.pos[1] + 1):
@@ -414,8 +480,8 @@ while map.TileExists(Tile.Unexplored):
 				# Move to tile location
 				pass
 		# if not moved, move to random location
-
 		'''
+		
 		px = player.pos[0]
 		py = player.pos[1]
 		px += random.randint(-1, 1)
@@ -428,7 +494,7 @@ while map.TileExists(Tile.Unexplored):
 			px = map.width - 1
 		if py > map.height - 1:
 			py = map.height - 1
-		'''
+		
 
 		player.pos = (px, py)
 
@@ -440,13 +506,15 @@ while map.TileExists(Tile.Unexplored):
 			# Put card in discard pile
 			discoveryDiscardPile.AddCard(newLocation)
 		else:
-			newLocation = Tile.None
+			newLocation = VoidCard()
 
 		# Render map
 		RenderMap(player.pos)
 
-		if newLocation != Tile.None:
+		if newLocation.tile != Tile.None:
 			gameIO.PrintLine('Discovered a new location: ' + newLocation.name)
+		if newLocation.category == 'Dragon':
+			gameIO.PrintLine('It\'s a dragon!')
 
 		# End of turn - allow chance to quit game
 		rin = gameIO.Wait()
