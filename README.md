@@ -7,3 +7,12 @@ You can [read the instructions here](game/instructions.md).
 You can [download the cards here](cards/cards.md).
 
 A special set of custom designed playing cards is included, which can be printed off if you so wish.
+
+# Note to self
+
+* Amulets can be used to kill all dragons on your ship of matching element
+	* e.g. Kill all your wind dragons
+* Amulets can be used on a location of matching element to kill all your ship's dragons
+	* e.g. Kill all your dragons, if on a whirlwind
+* Added Merchant Ships. Same as towns, but can only sell up to 5 in total (similar to looting Treasure Islands)
+* Adjusted card ratios
