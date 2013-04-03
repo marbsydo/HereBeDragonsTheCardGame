@@ -29,20 +29,22 @@ A card taken from the **discovery pile** will be either a location or dragon:
     * Storm
     * Shipwreck
 * Dragon
+    * Hydra
     * Wind Leviathan
     * Wind Wyrm
+    * Kraken
     * Ocean Leviathan
     * Ocean Wyrm
+    * Cthulhu
     * Storm Leviathan
     * Storm Wyrm
+    * Flying Dutchman
     * Ghost Leviathan
     * Ghost Wyrm
 
 If it is a **location** card, draw the corresponding location on the map, then place the card in the **discovery discard pile**.
 
-If it is a **dragon**, place the card in your **troubles**. Troubles are placed face up in front of you, so that everyone can see. If more than one dragon now exists in your troubles, they all **fell** each other. Felled dragons go in the **discovery discard pile**.
-
-For example, if a ship is being troubled by two dragons, and then discovers a dragon, all three dragons are placed in the discovery discard pile.
+If it is a **dragon**, place the card in your **troubles**. Troubles are placed face up in front of you, so that everyone can see.
 
 ## Action
 
