@@ -6,64 +6,52 @@
 
 On their turn, a player can perform one movement and multiple actions. The order does not matter. Additional movement can be achieved through the use of certain actions.
 
-At the very end of their turn, the player must ensure they do not have more than 3 **loot**. Excess loot must be discarded.
-* Discarded **amulets** go in the **discovery discard pile**.
-* Discarded **treasures** go in the **treasures discard pile**.
+At the very end of their turn, the player must ensure they do not have more than 3 **loot**. Excess loot must be discarded into the **treasures discard pile**.
 
 ## Movement
 
-A ship can move up to two squares. Each movement must be directly North, South, East or West. If the first movement lands the ship in an **unexplored square**, it does not get its second movement that turn. However, actions can allow the ship to move again.
+A ship can move either horizontally, vertically or diagonally into an adjacent square.
 
-Examples of legal movements:
-* Move to an adjacent **unexplored square**, and stop.
-* Move to an adjacent **explored square**, then move to an adjacent **unexplored square**, and stop.
-* Move to an adjacent **explored square**, then move to an adjacent **explored square**, and stop.
-
-Ships cannot sail off the edge of the map. Ships can sail on every single square in the map, even squares with other players on. A ship being troubled by a dragon can move onto a town, though it cannot sell loot to that town.
+Ships cannot sail off the edge of the map. Ships can sail on every single square in the map, even squares with other players on. A ship being troubled by a dragon can move onto a town or merchant ship, though it cannot sell loot to that town or merchant ship.
 
 If the ship moves into an unexplored square, pick up a card from the **discovery pile**, and write the corresponding symbol onto the map square. Once a square has a symbol, it is considered to be an **explored square**.
 
 ## Discovery
 
-A card taken from the **discovery pile** will be either a location, amulet, or dragon:
+A card taken from the **discovery pile** will be either a location or dragon:
 
 * Location
     * Open Ocean
     * Treasure Island
+    * Merchant Ship
     * Whirlwind
     * Whirlpool
     * Storm
     * Shipwreck
-* Amulet
-    * Wind Amulet
-    * Ocean Amulet
-    * Storm Amulet
-    * Ghost Amulet
-    * Dragon Amulet
 * Dragon
+    * Hydra
     * Wind Leviathan
     * Wind Wyrm
+    * Kraken
     * Ocean Leviathan
     * Ocean Wyrm
+    * Cthulhu
     * Storm Leviathan
     * Storm Wyrm
+    * Flying Dutchman
     * Ghost Leviathan
     * Ghost Wyrm
 
 If it is a **location** card, draw the corresponding location on the map, then place the card in the **discovery discard pile**.
 
-If it is an **amulet**, store the card in your **loot**. Loot is held in your hand, hidden from other players.
-
-If it is a **dragon**, place the card in your **troubles**. Troubles are placed face up in front of you, so that everyone can see. If more than one dragon now exists in your troubles, they all **fell** each other. Felled dragons go in the **discovery discard pile**.
-
-For example, if a ship is being troubled by two dragons, and then discovers a dragon, all three dragons are placed in the discovery discard pile.
+If it is a **dragon**, place the card in your **troubles**. Troubles are placed face up in front of you, so that everyone can see.
 
 ## Action
 
 There are several potential actions, depending upon your ship's position, loot, and the positions of other ships:
 
 * Loot a **treasure island**;
-* Deposit **loot** at a **town**;
+* Deposit **loot** at a **town** or at a **merchant ship**;
 * Use an **amulet** action;
 * Use a **treasure** action.
 
@@ -79,14 +67,12 @@ Keep a tally in the treasure island square of how much treasure has been looted.
 
 ### Depositing
 
-If your ship is on a **town** square, you can deposit **loot** to gain **victory points**, proving your ship is not being troubled by a dragon. Ships being troubled by a dragon can stop on a town square, but cannot deposit loot at a town. Each type of loot has its own value.
+* If your ship is on a **town**, you can deposit **loot** to gain **victory points**, providing your ship is not being troubled by dragons.
+* If your ship is on a **merchant ship**, you can deposit **loot** to gain **victory points**, providing your ship is not being troubled by dragons. However, only 5 loot in total can be sold to any one merchant ship throughout the entire game. A tally must be kept on the merchant ship square, indicating how much has been sold.
 
-Upon depositing a piece of loot, it must be discarded.
+Ships being troubled by dragons can go on to towns and merchant ships, they just cannot sell loot.
 
-* Discarded **amulets** go in the **discovery discard pile**.
-* Discarded **treasures** go in the **treasures discard pile**.
-
-You can deposit as little or as much of your loot as you wish.
+Each type of loot has its own value. You can deposit as little or as much of your loot as you wish. Upon depositing a piece of loot, it must be discarded.
 
 ### Amulet Actions
 
@@ -94,6 +80,7 @@ Each amulet can perform the following actions:
 
 * Steal;
 * Fell;
+* Sell;
 * Special action.
 
 After an amulet's action is used, that amulet must be discarded into the **discovery discard pile**. Amulet actions require specific circumstances, which are elaborated below.
@@ -106,21 +93,29 @@ A **dragon amulet** can steal from any ship being troubled by at least one drago
 
 Other amulets can only steal under the following conditions:
 
-* A **wind amulet** can steal from any ship _near_ a **whirlwind**.
-* An **ocean amulet** can steal from any ship _near_ a **whirlpool**.
-* A **storm amulet** can steal from any ship _near_ a **storm**.
-* A **ghost amulet** can steal from any ship _near_ a **shipwreck**.
+* A **wind amulet** can steal from any ship adjacent to a **whirlwind**.
+* An **ocean amulet** can steal from any ship adjacent to a **whirlpool**.
+* A **storm amulet** can steal from any ship adjacent to a **storm**.
+* A **ghost amulet** can steal from any ship adjacent to a **shipwreck**.
 
-A ship is considered to be _near_ a location if it is on top of the location, or within 1 square directly North, South, East, West, or diagonally!
+A ship is considered to be _adjacent to_ a location if it is on top of the location, or within 1 square directly North, South, East, West, or diagonally!
 
 ### Amulet - Felling
 
-Any amulet can be used to **fell** a dragon of the same element. A felled dragon is removed from your **troubles** and placed in the **discovery discard pile**.
+Any amulet can be used to **fell** all dragons on a ship of their element. Felled dragons are removed from your **troubles** and placed in the **discovery discard pile**.
 
-* A **wind amulet** can fell a **wind wyrm** or a **wind leviathan**.
-* An **ocean amulet** can fell an **ocean wyrm** or an **ocean leviathan**.
-* A **storm amulet** can fell a **storm wyrm** or a **storm leviathan**.
-* A **ghost amulet** can fell a **ghost wyrm** or a **ghost leviathan**.
+* A **wind amulet** can fell **wind wyrms**, **wind leviathans** and **wind hydras**.
+* An **ocean amulet** can fell **ocean wyrms**, **ocean leviathans** and **ocean krakens**.
+* A **storm amulet** can fell **storm wyrms**, **storm leviathans** and **storm cthulhus**.
+* A **ghost amulet** can fell **ghost wyrms**, **ghost leviathans** and **ghost flying dutchmans**.
+
+Amulets can also be used to **fell** all dragons on a ship, regardless of their element. The catch is that the ship using the amulet must be on a square whose element matches that of the amulet.
+
+* A **wind amulet** can fell all your ship's dragons when your ship is on a **whirlwind**.
+* An **ocean amulet** can fell all your ship's dragons when your ship is on a **whirlpool**.
+* A **storm amulet** can fell all your ship's dragons when your ship is on a **storm**.
+* A **ghost amulet** can fell all your ship's dragons when your ship is on a **shipwreck**.
+* A **dragon amulet** can fell all your ship's dragons when your ship is on any square!
 
 ### Amulet - Special Action
 
@@ -128,9 +123,7 @@ Amulets each have their own special action.
 
 #### Dragon Amulet
 
-The **dragon amulet** can be used to move a troubling dragon. One troubling dragon can be moved from any one ship, to any other ship. The dragon amulet is then discarded, and placed in the **discovery discard pile**.
-
-If a dragon is moved to a ship already trouble by a dragon, they do _not_ fell each other. Instead, that ship is now trouble by both dragons. In this way, a ship can be troubled by more than one dragon at a time.
+The **dragon amulet** can be used to relocate all of one ship's dragons to another ship. The dragon amulet is then discarded, and placed in the **discovery discard pile**.
 
 Neither ship has to be in a specific location for the dragon amulet's special action to be used.
 
