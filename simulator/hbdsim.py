@@ -248,60 +248,60 @@ class Gold(TreasureCard):
 	def __init__(self):
 		TreasureCard.__init__(self)
 		self.name = 'Gold'
-		self.victoryPoints = 2;
+		self.victoryPoints = 2
 
 class Jewels(TreasureCard):
 	def __init__(self):
 		TreasureCard.__init__(self)
 		self.name = 'Jewels'
-		self.victoryPoints = 2;
+		self.victoryPoints = 2
 
 class Map(TreasureCard):
 	def __init__(self):
 		TreasureCard.__init__(self)
 		self.name = 'Map'
-		self.victoryPoints = 1;
+		self.victoryPoints = 1
 
 class Rum(TreasureCard):
 	def __init__(self):
 		TreasureCard.__init__(self)
 		self.name = 'Rum'
-		self.victoryPoints = 1;
+		self.victoryPoints = 1
 
 # Individual cards - amulets
 class WindAmulet(AmuletCard):
 	def __init__(self):
 		AmuletCard.__init__(self)
 		self.name = 'Wind Amulet'
-		self.victoryPoints = 1;
+		self.victoryPoints = 1
 		self.tile = Tile.Whirlwind
 
 class OceanAmulet(AmuletCard):
 	def __init__(self):
 		AmuletCard.__init__(self)
 		self.name = 'Ocean Amulet'
-		self.victoryPoints = 1;
+		self.victoryPoints = 1
 		self.tile = Tile.Whirlpool
 
 class StormAmulet(AmuletCard):
 	def __init__(self):
 		AmuletCard.__init__(self)
 		self.name = 'Storm Amulet'
-		self.victoryPoints = 1;
+		self.victoryPoints = 1
 		self.tile = Tile.Tempest
 
 class GhostAmulet(AmuletCard):
 	def __init__(self):
 		AmuletCard.__init__(self)
 		self.name = 'Ghost Amulet'
-		self.victoryPoints = 1;
+		self.victoryPoints = 1
 		self.tile = Tile.Shipwreck
 
 class DragonAmulet(AmuletCard):
 	def __init__(self):
 		AmuletCard.__init__(self)
 		self.name = 'Dragon Amulet'
-		self.victoryPoints = 2;
+		self.victoryPoints = 2
 		self.tile = Tile.Any
 
 class CardPile:
@@ -385,6 +385,7 @@ class Player:
 		self.pos = pos
 		self.loot = CardPile()
 		self.trouble = CardPile()
+		self.victoryPoints = 0
 
 gameIO = GameIO()
 
