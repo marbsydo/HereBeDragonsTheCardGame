@@ -4,8 +4,6 @@ Here be Dragons is an exploration based card game where you sail uncharted ocean
 
 You can [read the instructions here](game/instructions.md).
 
-You can [download the cards here](cards/cards.md).
-
 A special set of custom designed playing cards is included, which can be printed off if you so wish.
 
 # Note to self
