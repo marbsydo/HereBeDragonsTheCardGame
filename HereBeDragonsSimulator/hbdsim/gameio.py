@@ -2,6 +2,9 @@ import os
 import sys
 
 class GameIO:
+	def __init__(self):
+		self.messages = Messages()
+
 	def Clear(self):
 		os.system(['clear', 'cls'][os.name == 'nt'])
 
@@ -60,3 +63,18 @@ class GameIO:
 
 	def Wait(self):
 		return self.Input('Press <enter> to continue\n')
+
+	def ShowAllMessages(self):
+		for msg in self.messages.messageQueue:
+			self.PrintLine(msg)
+		self.messages.Clear()
+
+class Messages():
+	def __init__(self):
+		self.Clear()
+
+	def Clear(self):
+		self.messageQueue = []
+
+	def Add(self, msg):
+		self.messageQueue.append(str(msg))

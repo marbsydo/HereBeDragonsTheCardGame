@@ -2,22 +2,15 @@ import random
 import tiles
 
 class PlayerAI():
-	def __init__(self):
-		self.Reset()
-
-	def Reset(self):
-		self.player = None
-		self.gameMap = None
+	def __init__(self, gameData):
+		self.gameData = gameData
 
 	def SetPlayer(self, player):
 		self.player = player
 
-	def SetMap(self, gameMap):
-		self.gameMap = gameMap
-
 	def MoveToUnexplored(self):
 		# Get all tiles adjacent to current player
-		adjacentTiles = self.player.FindAdjacentTiles(self.gameMap)
+		adjacentTiles = self.player.FindAdjacentTiles(self.gameData.gameMap)
 
 		# Shuffle these tiles randomly
 		random.shuffle(adjacentTiles)
@@ -30,7 +23,7 @@ class PlayerAI():
 				newLocation = (adjacentTile[0][0], adjacentTile[0][1])
 				break
 
-		self.player.MoveToPos(newLocation, self.gameMap)
+		self.player.MoveToPos(self.gameData, newLocation)
 
 	def MoveRandomly(self):
 		# Completely random movement
@@ -42,10 +35,10 @@ class PlayerAI():
 			px = 0
 		if py < 0:
 			py = 0
-		if px > self.gameMap.width - 1:
-			px = self.gameMap.width - 1
-		if py > self.gameMap.height - 1:
-			py = self.gameMap.height - 1
+		if px > self.gameData.gameMap.width - 1:
+			px = self.gameData.gameMap.width - 1
+		if py > self.gameData.gameMap.height - 1:
+			py = self.gameData.gameMap.height - 1
 		newLocation = (px, py)
 
-		self.player.MoveToPos(newLocation, self.gameMap)
+		self.player.MoveToPos(self.gameData, newLocation)

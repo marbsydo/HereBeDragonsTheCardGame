@@ -6,6 +6,7 @@ import random
 # Import game modules
 from gameio import GameIO
 from gamemap import GameMap
+from gamedata import GameData
 from ai import PlayerAI
 import tiles
 import cards
@@ -15,18 +16,9 @@ import players
 # Create IO interface, map and players
 gameIO = GameIO()
 gameMap = GameMap(10, 10)
-ai = PlayerAI()
-playerList = players.GenerateDefaultPlayers(gameMap.width, gameMap.height)
-
-# Create card piles
-discoveryDiscardPile = cards.CardPile()
-treasureDiscardPile = cards.CardPile()
-discoveryCardPile = cards.CardPile(discoveryDiscardPile)
-treasureCardPile = cards.CardPile(treasureDiscardPile)
-
-# Populate discovery and treasure card piles
-discoveryCardPile.PopulateWithDiscoveryCards()
-treasureCardPile.PopulateWithTreasureCards()
+gameData = GameData(gameIO, gameMap)
+ai = PlayerAI(gameData)
+playerList = players.GenerateDefaultPlayers(gameData)
 
 gameIO.Clear()
 
@@ -41,9 +33,6 @@ autoplay = gin == 'a' or gin == 'auto'
 autoplayMax = 1000
 turn = 0
 
-ai.Reset()
-ai.SetMap(gameMap)
-
 while (not autoplay and gameMap.TileExists(tiles.Unexplored)) or (autoplay and turn < autoplayMax and gameMap.TileExists(tiles.Unexplored)):
 	for player in playerList:
 		
@@ -56,24 +45,11 @@ while (not autoplay and gameMap.TileExists(tiles.Unexplored)) or (autoplay and t
 		ai.SetPlayer(player)
 		ai.MoveToUnexplored()
 
-		if gameMap.TileGet(player.pos[0], player.pos[1]) == tiles.Unexplored:
-			# Discover a new location
-			newLocation = discoveryCardPile.TakeTopCard()
-			gameMap.TileSet(player.pos[0], player.pos[1], newLocation.tile)
-
-			# Put card in discard pile
-			discoveryDiscardPile.AddCard(newLocation)
-		else:
-			newLocation = cards.VoidCard()
-
 		#@@ Render map
 		gameMap.RenderMap(gameIO, player.pos)
 
-		#@@ Event output
-		if newLocation.tile != tiles.Invalid:
-			gameIO.PrintLine('Discovered a new location: ' + newLocation.name)
-		if newLocation.category == 'Dragon':
-			gameIO.PrintLine('It\'s a dragon!')
+		#@@ Show any events that occurred
+		gameIO.ShowAllMessages()
 
 		#@@ End of turn
 		if not autoplay:
