@@ -24,9 +24,9 @@ It is the golden age of exploration. You are captain of a ship, boldy setting of
 
 ## General Overview
 
-The aim is to collect the most **victory points**. Victory points are obtained by selling **loot** to **towns**. Loot consists of **amulets** and **treasures**. Treasures are picked up at **treasure islands**, while amulets are sometimes found by discovering locations.
+The aim is to collect the most **victory points**. Victory points are obtained by selling **loot** to **towns** and **merchant ships**. Loot consists of **amulets** and **treasures**. Treasures are picked up at **treasure islands**, while amulets are sometimes found by discovering locations.
 
-Locations are discovered by sailing your ship into unexplored squares. When a location is discovered, the map must be updated to show that square has been explored by drawing the corresponding map symbol. Occasionally a **dragon** will be discovered. The dragon troubles whichever ship discovered it. A ship being troubled by a dragon cannot sell loot to towns.
+Locations are discovered by sailing your ship into unexplored squares. When a location is discovered, the map must be updated to show that square has been explored by drawing the corresponding map symbol. Occasionally a **dragon** will be discovered. The dragon troubles whichever ship discovered it. A ship being troubled by a dragon cannot sell loot to towns or merchant ships.
 
 Most loot can be used to perform an action. For example, amulets can **fell** certain types of dragons. While a ship has more than 3 loot it cannot move, and must dispose of the excess loot before its turn ends.
 
@@ -51,12 +51,8 @@ A player can move their ship once and perform multiple actions, all in any order
 
 ### Movement
 
-* A ship can move up to two squares.
-    * Each movement must be horizontal or vertical, not diagonal.
-    * If the first move lands on an unexplored square, the ship does not get a second move.
-    * Actions can be performed in-between moves.
+* A ship can move one square in any direction: horizontal, vertical or diagonal.
 * If the ship lands on an unexplored square, take a card from the **discovery pile**. Update the map by drawing the symbol for the discovered location. (The symbol is on the top right hand corner of the card, if using the custom card set. Otherwise, refer to the **help sheet**).
-    * If the card is an **amulet**, keep it in your **loot**.
     * If the card is a **dragon**, place it in your **troubles**.
         * If any dragons already exist in your troubles, all the dragons **fell** each other.
     * If the card is a **location**, place it in the **discovery discard pile**.
@@ -64,12 +60,12 @@ A player can move their ship once and perform multiple actions, all in any order
 ### Actions
 
 * Loot can be discarded (i.e. thrown overboard).
-    * Discarded **amulets** go in the **discovery discard pile**.
-    * Discarded **treasures** go in the **treasures discard pile**.
-* If the ship is on a **town**, **loot** can be deposited in exchange for **victory points** (providing the ship is not troubled by a dragon).
+    * Discarded **loot** go in the **treasures discard pile**.
+* If the ship is on a **town** or a **merchant ship**, **loot** can be deposited in exchange for **victory points** (providing the ship is not troubled by a dragon).
     * The value of loot varies. (The quantity of victory points is written on the card, if using the custom card set. Otherwise, refer to the **help sheet**).
     * Keep a tally of each player's victory points beneath their ship name.
     * Deposited loot goes back in the relevant discard pile.
+    * **Merchant ships** must keep a tally in their square of how much loot has been sold to them. No more than 5 loot in total can be sold to a merchant ship.
 * If the ship is on a **treasure island**, **treasure** can be obtained.
     * A maximum of 3 treasure per island, per turn, can be taken.
     * An island is depleted after 5 treasure has been taken in total (regardless of who took it).
