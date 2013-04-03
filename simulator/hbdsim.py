@@ -464,10 +464,13 @@ gameIO.PrintLine('There are ' + str(len(players)) + ' players:')
 for player in players:
 	gameIO.PrintLine('* ' + player.name)
 gameIO.PrintLine('The game is about to start.')
-gameIO.Wait()
+gin = gameIO.Input('a (auto) to automatically run game until end\ns (step) to manually step through game turns\n')
+
+autoplay = gin == 'a' or gin == 'auto'
+autoplayMax = 1000
 
 turn = 0
-while map.TileExists(Tile.Unexplored):
+while (not autoplay and map.TileExists(Tile.Unexplored)) or (autoplay and turn < autoplayMax and map.TileExists(Tile.Unexplored)):
 	for player in players:
 		# Start of turn - clear, show player info
 		gameIO.Clear()
@@ -544,6 +547,7 @@ while map.TileExists(Tile.Unexplored):
 			gameIO.PrintLine('It\'s a dragon!')
 
 		# End of turn - allow chance to quit game
-		rin = gameIO.Wait()
-		if rin != '':
-			sys.exit()
+		if not autoplay:
+			rin = gameIO.Wait()
+			if rin != '':
+				sys.exit()
