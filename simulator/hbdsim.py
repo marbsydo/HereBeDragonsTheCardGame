@@ -339,6 +339,14 @@ class CardPile:
 				self.refillPile.EmptyCardPile()
 				self.Shuffle()
 
+class Player:
+	def __init__(self, name, pos):
+		self.name = name
+		self.pos = pos
+		self.loot = CardPile()
+		self.trouble = CardPile()
+		self.victoryPoints = 0
+
 discoveryDiscardPile = CardPile()
 treasureDiscardPile = CardPile()
 discoveryCardPile = CardPile(discoveryDiscardPile)
@@ -376,27 +384,15 @@ treasureCardPile.AddCard(GhostAmulet(), 2),
 treasureCardPile.AddCard(DragonAmulet(), 2),
 treasureCardPile.Shuffle()
 
-card = discoveryCardPile.TakeTopCard()
-print card.name
-
-class Player:
-	def __init__(self, name, pos):
-		self.name = name
-		self.pos = pos
-		self.loot = CardPile()
-		self.trouble = CardPile()
-		self.victoryPoints = 0
-
 gameIO = GameIO()
-
-map = GameMap(10, 10)
+gameMap = GameMap(10, 10)
 
 # Create players
 players = [
 Player('Jolly Rodger', [0, 0]),
-Player('Octopus Brine', [0, map.height - 1]),
-Player('Zanzibar', [map.width - 1, 0]),
-Player('Going Merry', [map.width - 1, map.height - 1])
+Player('Octopus Brine', [0, gameMap.height - 1]),
+Player('Zanzibar', [gameMap.width - 1, 0]),
+Player('Going Merry', [gameMap.width - 1, gameMap.height - 1])
 ]
 
 def NumberToTally(number):
@@ -440,11 +436,11 @@ def RenderMap(pos = [-1, -1]):
 	TileToColourSymbol(Tile.Tempest) + ' = Tempest     ' + TileToColourSymbol(Tile.MerchantShip) + ' = Merchant Ship',
 	TileToColourSymbol(Tile.Shipwreck) + ' = Shipwreck   ' + TileToColourSymbol(Tile.OpenOcean) + ' = Open ocean',
 	]
-	gameIO.PrintLine('╔' + '═' * (map.width * 2 + 1) + '╗')
-	for y in range(0, map.width):
+	gameIO.PrintLine('╔' + '═' * (gameMap.width * 2 + 1) + '╗')
+	for y in range(0, gameMap.width):
 		gameIO.Print('║ ')
-		for x in range(0, map.height):
-			tile = map.TileGet(x, y)
+		for x in range(0, gameMap.height):
+			tile = gameMap.TileGet(x, y)
 
 			if x == pos[0] and y == pos[1]:
 				tileString = gameIO.MakeString(TileToSymbol(tile), 'red', 'background')
@@ -456,7 +452,7 @@ def RenderMap(pos = [-1, -1]):
 			gameIO.PrintLine(' ' + key[y])
 		else:
 			gameIO.PrintLine()
-	gameIO.PrintLine('╚' + '═' * (map.width * 2 + 1) + '╝')
+	gameIO.PrintLine('╚' + '═' * (gameMap.width * 2 + 1) + '╝')
 
 gameIO.Clear()
 gameIO.PrintLine('Here be Dragons: The Card Game: The Simulator')
@@ -471,7 +467,7 @@ autoplay = gin == 'a' or gin == 'auto'
 autoplayMax = 1000
 
 turn = 0
-while (not autoplay and map.TileExists(Tile.Unexplored)) or (autoplay and turn < autoplayMax and map.TileExists(Tile.Unexplored)):
+while (not autoplay and gameMap.TileExists(Tile.Unexplored)) or (autoplay and turn < autoplayMax and gameMap.TileExists(Tile.Unexplored)):
 	for player in players:
 		# Start of turn - clear, show player info
 		gameIO.Clear()
@@ -482,9 +478,9 @@ while (not autoplay and map.TileExists(Tile.Unexplored)) or (autoplay and turn <
 		
 		# Find all adjacent tiles
 		adjacentTiles = []
-		for x in range(max(player.pos[0] - 1, 0), min(player.pos[0] + 2, map.width)):
-			for y in range(max(player.pos[1] - 1, 0), min(player.pos[1] + 2, map.height)):
-				adjacentTiles.append(((x, y), map.TileGet(x, y)))
+		for x in range(max(player.pos[0] - 1, 0), min(player.pos[0] + 2, gameMap.width)):
+			for y in range(max(player.pos[1] - 1, 0), min(player.pos[1] + 2, gameMap.height)):
+				adjacentTiles.append(((x, y), gameMap.TileGet(x, y)))
 		random.shuffle(adjacentTiles)
 
 		'''
@@ -521,18 +517,18 @@ while (not autoplay and map.TileExists(Tile.Unexplored)) or (autoplay and turn <
 			px = 0
 		if py < 0:
 			py = 0
-		if px > map.width - 1:
-			px = map.width - 1
-		if py > map.height - 1:
-			py = map.height - 1
+		if px > gameMap.width - 1:
+			px = gameMap.width - 1
+		if py > gameMap.height - 1:
+			py = gameMap.height - 1
 		'''
 
 		player.pos = (px, py)
 
-		if map.TileGet(player.pos[0], player.pos[1]) == Tile.Unexplored:
+		if gameMap.TileGet(player.pos[0], player.pos[1]) == Tile.Unexplored:
 			# Discover a new location
 			newLocation = discoveryCardPile.TakeTopCard()
-			map.TileSet(px, py, newLocation.tile)
+			gameMap.TileSet(px, py, newLocation.tile)
 
 			# Put card in discard pile
 			discoveryDiscardPile.AddCard(newLocation)
