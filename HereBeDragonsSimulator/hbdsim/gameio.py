@@ -50,6 +50,11 @@ class GameIO:
 		'bold': 9
 		}.get(colour, 9)
 
+	def NumberToTally(self, number):
+		fives = int(number) / 5
+		remainder = number - fives * 5
+		return '||||/ ' * fives + '|' * remainder
+
 	def Input(self, text):
 		return raw_input(text)
 

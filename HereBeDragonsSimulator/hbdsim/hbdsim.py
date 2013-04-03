@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import sys
 import random
@@ -26,42 +25,9 @@ treasureCardPile = cards.CardPile(treasureDiscardPile)
 discoveryCardPile.PopulateWithDiscoveryCards()
 treasureCardPile.PopulateWithTreasureCards()
 
-def TileToColourSymbol(tile):
-	return gameIO.MakeString(tiles.TileToSymbol(tile), tiles.TileToColour(tile))
-
-def NumberToTally(number):
-	fives = int(number) / 5
-	remainder = number - fives * 5
-	return '||||/ ' * fives + '|' * remainder
-
-def RenderMap(pos = [-1, -1]):
-	key = [
-	TileToColourSymbol(tiles.Whirlpool) + ' = Whirlpool   ' + TileToColourSymbol(tiles.TreasureIsland) + ' = Treasure Island',
-	TileToColourSymbol(tiles.Whirlwind) + ' = Whirlwind   ' + TileToColourSymbol(tiles.Town) + ' = Town',
-	TileToColourSymbol(tiles.Tempest) + ' = Tempest     ' + TileToColourSymbol(tiles.MerchantShip) + ' = Merchant Ship',
-	TileToColourSymbol(tiles.Shipwreck) + ' = Shipwreck   ' + TileToColourSymbol(tiles.OpenOcean) + ' = Open ocean',
-	]
-	gameIO.PrintLine('╔' + '═' * (gameMap.width * 2 + 1) + '╗')
-	for y in range(0, gameMap.width):
-		gameIO.Print('║ ')
-		for x in range(0, gameMap.height):
-			tile = gameMap.TileGet(x, y)
-
-			if x == pos[0] and y == pos[1]:
-				tileString = gameIO.MakeString(tiles.TileToSymbol(tile), 'red', 'background')
-			else:
-				tileString = TileToColourSymbol(tile)
-			gameIO.Print(tileString + ' ')
-		gameIO.Print('║')
-		if y < len(key):
-			gameIO.PrintLine(' ' + key[y])
-		else:
-			gameIO.PrintLine()
-	gameIO.PrintLine('╚' + '═' * (gameMap.width * 2 + 1) + '╝')
-
 gameIO.Clear()
 gameIO.PrintLine('Here be Dragons: The Card Game: The Simulator')
-RenderMap()
+gameMap.RenderMap(gameIO)
 gameIO.PrintLine('There are ' + str(len(playerList)) + ' players:')
 for player in playerList:
 	gameIO.PrintLine('* ' + player.name)
@@ -141,7 +107,7 @@ while (not autoplay and gameMap.TileExists(tiles.Unexplored)) or (autoplay and t
 			newLocation = cards.VoidCard()
 
 		# Render map
-		RenderMap(player.pos)
+		gameMap.RenderMap(gameIO, player.pos)
 
 		if newLocation.tile != tiles.Invalid:
 			gameIO.PrintLine('Discovered a new location: ' + newLocation.name)
