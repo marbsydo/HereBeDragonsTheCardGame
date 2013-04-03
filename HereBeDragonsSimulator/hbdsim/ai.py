@@ -23,6 +23,8 @@ class PlayerAI():
 				newLocation = (adjacentTile[0][0], adjacentTile[0][1])
 				break
 
+		# Actually move the player
+		# The player checks if the move is legal
 		self.player.MoveToPos(self.gameData, newLocation)
 
 	def MoveRandomly(self):

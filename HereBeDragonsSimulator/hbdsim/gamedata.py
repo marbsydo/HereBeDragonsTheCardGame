@@ -5,6 +5,9 @@ class GameData():
 		self.gameIO = gameIO
 		self.gameMap = gameMap
 
+		# Keep track of which turn it is
+		self.turn = 1
+
 		# Create card piles
 		self.discoveryDiscardPile = cards.CardPile()
 		self.treasureDiscardPile = cards.CardPile()
@@ -14,3 +17,6 @@ class GameData():
 		# Populate discovery and treasure card piles
 		self.discoveryCardPile.PopulateWithDiscoveryCards()
 		self.treasureCardPile.PopulateWithTreasureCards()
+
+	def IncrementTurn(self):
+		self.turn = self.turn + 1
