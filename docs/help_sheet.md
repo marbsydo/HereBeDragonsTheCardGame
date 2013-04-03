@@ -80,12 +80,16 @@ Here is some advice to help remember which suit is which element:
 * Whirlpool
 * Tempest
 * Shipwreck
+* Hydra
 * Wind Leviathan
 * Wind Wyrm
+* Kraken
 * Ocean Leviathan
 * Ocean Wyrm
+* Cthulhu
 * Storm Leviathan
 * Storm Wyrm
+* Flying Dutchman
 * Ghost Leviathan
 * Ghost Wyrm
 
