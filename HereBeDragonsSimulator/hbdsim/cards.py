@@ -241,3 +241,39 @@ class CardPile:
 					self.AddCard(card, 1)
 				self.refillPile.EmptyCardPile()
 				self.Shuffle()
+
+	def PopulateWithDiscoveryCards(self):
+		self.EmptyCardPile()
+		self.AddCard(OpenOcean(), 4)
+		self.AddCard(TreasureIsland(), 6)
+		self.AddCard(MerchantShip(), 2)
+		self.AddCard(Whirlwind(), 2)
+		self.AddCard(Whirlpool(), 2)
+		self.AddCard(Tempest(), 2)
+		self.AddCard(Shipwreck(), 2)
+		self.AddCard(WindHydra())
+		self.AddCard(WindLeviathan())
+		self.AddCard(WindWyrm())
+		self.AddCard(OceanKraken())
+		self.AddCard(OceanLeviathan())
+		self.AddCard(OceanWyrm())
+		self.AddCard(StormCthulhu())
+		self.AddCard(StormLeviathan())
+		self.AddCard(StormWyrm())
+		self.AddCard(GhostFlyingDutchman())
+		self.AddCard(GhostLeviathan())
+		self.AddCard(GhostWyrm())
+		self.Shuffle()
+
+	def PopulateWithTreasureCards(self):
+		self.EmptyCardPile()
+		self.AddCard(Gold(), 3),
+		self.AddCard(Jewels(), 3),
+		self.AddCard(Map(), 3),
+		self.AddCard(Rum(), 3),
+		self.AddCard(WindAmulet(), 2),
+		self.AddCard(OceanAmulet(), 2),
+		self.AddCard(StormAmulet(), 2),
+		self.AddCard(GhostAmulet(), 2),
+		self.AddCard(DragonAmulet(), 2),
+		self.Shuffle()

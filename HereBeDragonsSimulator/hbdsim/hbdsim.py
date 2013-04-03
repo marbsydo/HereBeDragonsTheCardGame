@@ -4,86 +4,35 @@
 import sys
 import random
 
+# Import game modules
 import tiles
 import cards
 import gameio
 import gamemap
 import players
 
+# Create IO interface, map and players
 gameIO = gameio.GameIO()
 gameMap = gamemap.GameMap(10, 10)
 playerList = players.GenerateDefaultPlayers(gameMap.width, gameMap.height)
 
+# Create card piles
 discoveryDiscardPile = cards.CardPile()
 treasureDiscardPile = cards.CardPile()
 discoveryCardPile = cards.CardPile(discoveryDiscardPile)
 treasureCardPile = cards.CardPile(treasureDiscardPile)
 
-discoveryCardPile.AddCard(cards.OpenOcean(), 4)
-discoveryCardPile.AddCard(cards.TreasureIsland(), 6)
-discoveryCardPile.AddCard(cards.MerchantShip(), 2)
-discoveryCardPile.AddCard(cards.Whirlwind(), 2)
-discoveryCardPile.AddCard(cards.Whirlpool(), 2)
-discoveryCardPile.AddCard(cards.Tempest(), 2)
-discoveryCardPile.AddCard(cards.Shipwreck(), 2)
-discoveryCardPile.AddCard(cards.WindHydra())
-discoveryCardPile.AddCard(cards.WindLeviathan())
-discoveryCardPile.AddCard(cards.WindWyrm())
-discoveryCardPile.AddCard(cards.OceanKraken())
-discoveryCardPile.AddCard(cards.OceanLeviathan())
-discoveryCardPile.AddCard(cards.OceanWyrm())
-discoveryCardPile.AddCard(cards.StormCthulhu())
-discoveryCardPile.AddCard(cards.StormLeviathan())
-discoveryCardPile.AddCard(cards.StormWyrm())
-discoveryCardPile.AddCard(cards.GhostFlyingDutchman())
-discoveryCardPile.AddCard(cards.GhostLeviathan())
-discoveryCardPile.AddCard(cards.GhostWyrm())
-discoveryCardPile.Shuffle()
+# Populate discovery and treasure card piles
+discoveryCardPile.PopulateWithDiscoveryCards()
+treasureCardPile.PopulateWithTreasureCards()
 
-treasureCardPile.AddCard(cards.Gold(), 3),
-treasureCardPile.AddCard(cards.Jewels(), 3),
-treasureCardPile.AddCard(cards.Map(), 3),
-treasureCardPile.AddCard(cards.Rum(), 3),
-treasureCardPile.AddCard(cards.WindAmulet(), 2),
-treasureCardPile.AddCard(cards.OceanAmulet(), 2),
-treasureCardPile.AddCard(cards.StormAmulet(), 2),
-treasureCardPile.AddCard(cards.GhostAmulet(), 2),
-treasureCardPile.AddCard(cards.DragonAmulet(), 2),
-treasureCardPile.Shuffle()
+def TileToColourSymbol(tile):
+	return gameIO.MakeString(tiles.TileToSymbol(tile), tiles.TileToColour(tile))
 
 def NumberToTally(number):
 	fives = int(number) / 5
 	remainder = number - fives * 5
 	return '||||/ ' * fives + '|' * remainder
-
-def TileToSymbol(tile):
-	return {
-		tiles.Unexplored: ' ',
-		tiles.Town: 'T',
-		tiles.OpenOcean: '~',
-		tiles.TreasureIsland: 'X',
-		tiles.MerchantShip: '$',
-		tiles.Whirlpool: 'o',
-		tiles.Whirlwind: '*',
-		tiles.Tempest: '^',
-		tiles.Shipwreck: '&',
-	}.get(tile, '?')
-
-def TileToColour(tile):
-	return {
-		tiles.Unexplored: 'default',
-		tiles.Town: 'default',
-		tiles.OpenOcean: 'blue',
-		tiles.TreasureIsland: 'yellow',
-		tiles.MerchantShip: 'green',
-		tiles.Whirlpool: 'magenta',
-		tiles.Whirlwind: 'cyan',
-		tiles.Tempest: 'red',
-		tiles.Shipwreck: 'crimson'
-	}.get(tile, 'grey')
-
-def TileToColourSymbol(tile):
-	return gameIO.MakeString(TileToSymbol(tile), TileToColour(tile))
 
 def RenderMap(pos = [-1, -1]):
 	key = [
@@ -99,7 +48,7 @@ def RenderMap(pos = [-1, -1]):
 			tile = gameMap.TileGet(x, y)
 
 			if x == pos[0] and y == pos[1]:
-				tileString = gameIO.MakeString(TileToSymbol(tile), 'red', 'background')
+				tileString = gameIO.MakeString(tiles.TileToSymbol(tile), 'red', 'background')
 			else:
 				tileString = TileToColourSymbol(tile)
 			gameIO.Print(tileString + ' ')
