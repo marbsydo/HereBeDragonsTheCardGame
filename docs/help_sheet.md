@@ -10,13 +10,14 @@ If playing with a regular deck of cards, this following table indicates which ea
 
 |                    | Spade           | Club            | Diamond         | Heart
 |-------------------:|:----------------|:----------------|:----------------|:----------------
-| Ace                | Wind Leviathan  | Ocean Leviathan | Storm Leviathan | Ghost Leviathan
-| 2                  | Wind Wyrm       | Ocean Wyrm      | Storm Wyrm      | Ghost Wyrm
-| 3 & 4              | Wind Amulet     | Ocean Amulet    | Storm Amulet    | Ghost Amulet
-| 5 & 6              | Whildwind       | Whirlpool       | Tempest         | Shipwreck
-| 7 & 8              | Open Ocean      | Open Ocean      | Open Ocean      | Open Ocean
-| 9 & 10             | Treasure Island | Treasure Island | Treasure Island | Treasure Island
-| Jack, Queen & King | Treasure        | Treasure        | Treasure        | Treasure
+| Ace                | Hydra           | Kraken          | Ctuhlhu         | Flying Dutchman
+| 2                  | Wind Leviathan  | Ocean Leviathan | Storm Leviathan | Ghost Leviathan
+| 3                  | Wind Wyrm       | Ocean Wyrm      | Storm Wyrm      | Ghost Wyrm
+| 4 & 5              | Wind Amulet     | Ocean Amulet    | Storm Amulet    | Ghost Amulet
+| 6 & 7              | Whildwind       | Whirlpool       | Tempest         | Shipwreck
+| 8                  | Open Ocean      | Open Ocean      | Open Ocean      | Open Ocean
+| 9 & 10             | Merchant Ship   | Treasure Island | Treasure Island | Treasure Island
+| Jack, Queen & King | Map             | Rum             | Jewels          | Gold
 | Joker              | Dragon Amulet   |                 | Dragon Amulet   |
 
 ## Map Squares
@@ -26,6 +27,7 @@ If playing with a regular deck of cards, this following table indicates which ea
 | Unexplored      | ![alt text][symbol_small_unexplored]
 | Open Ocean      | ![alt text][symbol_small_openocean]
 | Town            | ![alt text][symbol_small_town]
+| Merchant Ship   | ![alt text][symbol_small_merchantship]
 | Treasure Island | ![alt text][symbol_small_treasureisland]
 | Whirlwind       | ![alt text][symbol_small_whirlwind]
 | Whirlpool       | ![alt text][symbol_small_whirlpool]
@@ -35,22 +37,23 @@ If playing with a regular deck of cards, this following table indicates which ea
 [symbol_small_unexplored]: img/unexplored.png "Map square with nothing drawn in it"
 [symbol_small_openocean]: img/openocean.png "Map square with three horizontal waves drawn across it"
 [symbol_small_town]: img/town.png "Map square with a simple hut inside a basic island outline"
+[symbol_small_merchantship]: img/merchantship.png "Map square with a ship drawn like a capital D, and a triangular flag on top"
 [symbol_small_treasureisland]: img/treasureisland.png "Map square with an X inside a basic island outline"
 [symbol_small_whirlwind]: img/whirlwind.png "Map square with a basic sketch of a tornado"
 [symbol_small_whirlpool]: img/whirlpool.png "Map square with a spiral drawn in it"
-[symbol_small_tempest]: img/storm.png "Map square with a lightning bolt drawn in it"
+[symbol_small_tempest]: img/tempest.png "Map square with a lightning bolt drawn in it"
 [symbol_small_ghost]: img/shipwreck.png "Map square with a slightly wonky cross drawn in it"
 
 ## Elements
 
 Each card suit represents an element. For each of the four elements, there exists a leviathan, a wyrm, amulets and locations.
 
-| Element | Dragons                     | Amulet       | Location
-|:--------|:----------------------------|:-------------|:--------
-| Wind    | Wind Leviathan, Wind Wyrm   | Wind Amulet  | Whirlwind
-| Ocean   | Ocean Leviathan, Ocean Wyrm | Ocean Amulet | Whirlpool
-| Storm   | Storm Leviathan, Storm Wyrm | Storm Amulet | Tempest
-| Ghost   | Ghost Leviathan, Ghost Wyrm | Ghost Amulet | Shipwreck
+| Element | Dragons                                      | Amulet       | Location
+|:--------|:---------------------------------------------|:-------------|:--------
+| Wind    | Hydra, Wind Leviathan, Wind Wyrm             | Wind Amulet  | Whirlwind
+| Ocean   | Kraken, Ocean Leviathan, Ocean Wyrm          | Ocean Amulet | Whirlpool
+| Storm   | Cthulhu, Storm Leviathan, Storm Wyrm         | Storm Amulet | Tempest
+| Ghost   | Flying Dutchman, Ghost Leviathan, Ghost Wyrm | Ghost Amulet | Shipwreck
 
 Or put simply:
 
